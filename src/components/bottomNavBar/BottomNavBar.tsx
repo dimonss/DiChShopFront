@@ -15,7 +15,9 @@ const BottomNavBar = () => {
             bottom: '0px',
             background: color.primary,
             boxShadow: `0px 0px 20px ${color.iconActiveColor}`,
-            zIndex:1,
+            zIndex: 1,
+            maxWidth: '100%',
+            width: '425px'
         }}>
             <Grid container width='100%' justifyContent='space-around' sx={{height: '78px', alignItems: 'center'}}>
                 <HomeIcon fontSize='large'

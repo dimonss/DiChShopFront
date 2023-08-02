@@ -6,7 +6,15 @@ import colors from 'layout/colors';
 import color from 'layout/colors';
 import AddIcon from '@mui/icons-material/Add';
 
-const CardProduct = () => {
+
+interface PropI {
+    icon?: string;
+    name?: string;
+    cost?: number;
+    rating?: number;
+}
+
+const CardProduct: React.FC<PropI> = ({icon = coffeeImage, name = 'Cinnamon & Cocoa', cost = 99, rating = 4.5}) => {
     return (
         <Box
             p="14px"
@@ -17,17 +25,17 @@ const CardProduct = () => {
                 background: colors.cardBG,
                 margin: '0 12px 12px 0',
             }}>
-            <Box sx={{ overflow: 'hidden', position: 'relative'}}>
+            <Box mb={'14px'} sx={{overflow: 'hidden', position: 'relative'}}>
                 <Box sx={{
                     height: '20px',
-                    width: '40px',
+                    width: '44px',
                     position: 'absolute',
-                    borderBottomRightRadius: '10px',
-                    borderTopLeftRadius: '10px',
+                    borderBottomRightRadius: '15px',
+                    borderTopLeftRadius: '15px',
                     background: 'white',
                     opacity: '0.3',
                     overflow: 'hidden'
-                }}></Box>
+                }}/>
                 <Box sx={{display: 'flex', position: 'absolute', fontSize: '10px', left: '6px'}}>
                     <StarIcon fontSize="small" sx={{width: '14px', color: colors.yellow}}/>
                     <Box sx={{
@@ -35,23 +43,23 @@ const CardProduct = () => {
                         justifyItems: 'center',
                         alignItems: 'center',
                         marginLeft: '4px',
-                    }}>4.5</Box>
+                    }}>{rating}</Box>
                 </Box>
                 <Box sx={{
                     paddingTop: '-100px',
                     margin: 'auto',
-                    height: '110px',
-                    width: '110px',
+                    height: '120px',
+                    width: '100%',
                     borderRadius: '15px',
                     overflow: 'hidden',
                     padding: '0',
-                    backgroundImage: `url(${coffeeImage})`,
+                    backgroundImage: `url(${icon})`,
                     backgroundPosition: 'center center',
                     backgroundSize: 'cover',
                 }}>
                 </Box>
             </Box>
-            <Box sx={{textAlign: 'left', marginBottom: '14px'}}>Cinnamon & Cocoa</Box>
+            <Box mb={'14px'} sx={{textAlign: 'left', fontSize: '16px',}}>{name}</Box>
             <Box sx={{
                 display: 'flex',
                 position: 'relative',
@@ -66,7 +74,8 @@ const CardProduct = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexGrow: '6',
-                }}><b>99c</b></Box>
+                    fontSize: '16px'
+                }}><b>{cost + 'c'}</b></Box>
                 <Box sx={{
                     flexGrow: '1',
                     display: 'flex',

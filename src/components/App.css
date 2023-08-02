@@ -9,7 +9,10 @@
     font-size: calc(10px + 2vmin);
     color: white;
     font-family: "serif";
-    /*max-width: 425px;*/
+    position: relative;
+    max-width: 100%;
+    width: 425px;
+    overflow: hidden;
 }
 
 .App-logo {

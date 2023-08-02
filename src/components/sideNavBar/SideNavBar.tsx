@@ -2,10 +2,12 @@ import React, {useState} from 'react';
 import color from "layout/colors";
 import transitions from "layout/transitions";
 import Box from "@mui/material/Box";
+import useWindowSize from 'hooks/useWindowSize';
 
 const menuList = ['Cappuccino', 'Latte', 'Americano', 'Espresso', 'FlatWhite'];
 
 const SideNavBar = () => {
+    useWindowSize();
     const [activePage, setActivePage] = useState(0);
     return (
         <Box sx={{
@@ -17,10 +19,9 @@ const SideNavBar = () => {
             background: color.sideNavBarBG,
             position: 'fixed',
             bottom: '78px',
-            left: '-20px',
-            width: '36px',
+            left: `${window.innerWidth <= 425 ? 0 : (window.innerWidth / 2 - 212)}px`,
+            width: '32px',
             borderTopRightRadius: '60px',
-            padding: '20px 0 0 18px',
             fontSize: "14px",
 
         }}>
