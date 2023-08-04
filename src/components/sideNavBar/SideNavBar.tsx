@@ -36,6 +36,7 @@ const SideNavBar: React.FC<PropI> = ({ setContent }) => {
             }}>
             {menuList.map((item, index) => (
                 <Box
+                    key={index}
                     sx={{
                         color: activePage === index ? color.iconActiveColor : color.iconDefaultColor,
                         ...transitions.color,
