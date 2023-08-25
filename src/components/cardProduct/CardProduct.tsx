@@ -33,6 +33,7 @@ const CardProduct: React.FC<PropI> = ({
                 margin: '0 12px 12px 0',
                 justifyContent: 'space-between',
                 height: '220px',
+                cursor: 'pointer',
             }}>
             <Box mb={'14px'} sx={{ overflow: 'hidden', position: 'relative' }}>
                 {isLoading ? (
@@ -73,7 +74,7 @@ const CardProduct: React.FC<PropI> = ({
                                 borderRadius: '15px',
                                 overflow: 'hidden',
                                 padding: '0',
-                                backgroundImage: `url(${image})`,
+                                backgroundImage: `url(http://127.0.0.1/static/${image})`,
                                 backgroundPosition: 'center center',
                                 backgroundSize: 'cover',
                             }}

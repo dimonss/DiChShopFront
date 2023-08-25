@@ -44,6 +44,7 @@ const SideNavBar: React.FC<PropI> = ({ setContent }) => {
                         rotate: '180deg',
                         display: 'flex',
                         justifyContent: 'space-around',
+                        cursor: 'pointer',
                     }}
                     onClick={() => {
                         setActivePage(index);
