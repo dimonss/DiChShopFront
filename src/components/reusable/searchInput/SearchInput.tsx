@@ -1,10 +1,12 @@
-import React from 'react';
-import SearchIcon from "@mui/icons-material/Search";
-import {alpha, styled} from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
-const Search = styled('div')(({theme}) => ({
+import React, { useCallback, ChangeEvent } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
+import { alpha, styled } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
+import { useSearchParams } from 'react-router-dom';
+
+const Search = styled('div')(({ theme }) => ({
     position: 'relative',
-    borderRadius: "8px",
+    borderRadius: '8px',
     backgroundColor: '#171017',
     '&:hover': {
         backgroundColor: alpha(theme.palette.common.white, 0.25),
@@ -17,7 +19,7 @@ const Search = styled('div')(({theme}) => ({
     },
 }));
 
-const SearchIconWrapper = styled('div')(({theme}) => ({
+const SearchIconWrapper = styled('div')(({ theme }) => ({
     padding: theme.spacing(0, 2),
     height: '100%',
     position: 'absolute',
@@ -27,7 +29,7 @@ const SearchIconWrapper = styled('div')(({theme}) => ({
     justifyContent: 'center',
 }));
 
-const StyledInputBase = styled(InputBase)(({theme}) => ({
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: '#B9AE9B',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 7),
@@ -43,15 +45,21 @@ const StyledInputBase = styled(InputBase)(({theme}) => ({
     },
 }));
 const SearchInput = () => {
+    const [params, setSearchParams] = useSearchParams();
+    const searchHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        setSearchParams({ search: e.target.value });
+    }, []);
     return (
         <Search>
             <SearchIconWrapper>
-                <SearchIcon sx={{color: '#B9AE9B'}}/>
+                <SearchIcon sx={{ color: '#B9AE9B' }} />
             </SearchIconWrapper>
             <StyledInputBase
                 placeholder="Browse your favourite coffee…"
-                inputProps={{'aria-label': 'search'}}
+                inputProps={{ 'aria-label': 'search' }}
                 fullWidth
+                value={params.get('search') || ''}
+                onChange={searchHandler}
             />
         </Search>
     );

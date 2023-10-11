@@ -3,21 +3,17 @@ import color from 'layout/colors';
 import transitions from 'layout/transitions';
 import Box from '@mui/material/Box';
 import useWindowSize from 'hooks/useWindowSize';
-import { cappuccino, espresso, latte, americano, flatWhite, ContentI } from 'mockData/Content';
+import { useAppDispatch, useAppSelector } from 'types/globalTypes';
+import { fetchCategory } from 'redux/slices/contentSlice';
 
-const menuList = ['Cappuccino', 'Latte', 'Americano', 'Espresso', 'FlatWhite'];
-const data = [cappuccino, espresso, latte, americano, flatWhite];
-
-interface PropI {
-    setContent: (p: ContentI[]) => void;
-}
-
-const SideNavBar: React.FC<PropI> = ({ setContent }) => {
+const SideNavBar = () => {
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        dispatch(fetchCategory());
+    }, []);
     useWindowSize();
     const [activePage, setActivePage] = useState(0);
-    useEffect(() => {
-        setContent(data[activePage]);
-    }, [activePage, setContent]);
+    const categories = useAppSelector((state) => state?.content?.category);
     return (
         <Box
             sx={{
@@ -34,7 +30,7 @@ const SideNavBar: React.FC<PropI> = ({ setContent }) => {
                 borderTopRightRadius: '60px',
                 fontSize: '14px',
             }}>
-            {menuList.map((item, index) => (
+            {categories.map((item, index) => (
                 <Box
                     key={index}
                     sx={{
@@ -45,11 +41,12 @@ const SideNavBar: React.FC<PropI> = ({ setContent }) => {
                         display: 'flex',
                         justifyContent: 'space-around',
                         cursor: 'pointer',
+                        outline: 'none',
                     }}
                     onClick={() => {
                         setActivePage(index);
                     }}>
-                    {item}
+                    {item.name}
                 </Box>
             ))}
         </Box>

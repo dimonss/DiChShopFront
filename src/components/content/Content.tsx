@@ -1,30 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Container, Grid } from '@mui/material';
 import AboutUser from 'components/aboutUser/AboutUser';
 import CardProduct from 'components/cardProduct/CardProduct';
 import SearchInput from 'components/reusable/searchInput/SearchInput';
 import SideNavBar from 'components/sideNavBar/SideNavBar';
-import { ContentI } from 'mockData/Content';
 import { useAppDispatch, useAppSelector } from 'types/globalTypes';
 import { fetchProduct } from 'redux/slices/contentSlice';
+import {useSearchParams} from "react-router-dom";
 
 const Content = () => {
-    const [isLoading, setIsLoading] = useState(true);
-    const [data, setData] = useState<ContentI[]>([]);
     const dispatch = useAppDispatch();
-    const product = useAppSelector((store) => store.content.product);
+    const [product, isLoading] = useAppSelector((store) => [
+        store?.content?.product,
+        store?.loading?.product,
+    ]);
+    const [params] = useSearchParams();
 
     useEffect(() => {
-        dispatch(fetchProduct());
-    }, []);
-
-    useEffect(() => {
-        setIsLoading(true);
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 1500);
-        return () => clearTimeout(timer);
-    }, [data]);
+        dispatch(fetchProduct(params.get('search')));
+    }, [params.get('search')]);
 
     return (
         <Container>
@@ -42,7 +36,7 @@ const Content = () => {
                     />
                 ))}
             </Grid>
-            <SideNavBar setContent={setData} />
+            <SideNavBar />
         </Container>
     );
 };

@@ -1,8 +1,9 @@
 import { ActionReducerMapBuilder, AsyncThunk, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { STATUS } from 'api/statuses';
 import { getApiErrorMessage, getResponseErrorMessage } from 'api/utils';
-import { getCategory, getProduct } from 'api/contentAPI';
+import { findProduct, getCategory, getProduct } from 'api/contentAPI';
 import { ContentAsyncActions, ContentStateI } from 'redux/types/contentTypes';
+import { NullableString } from 'types/globalTypes';
 
 const initialState: ContentStateI = {
     product: [],
@@ -21,18 +22,26 @@ export const trackActionState = (
 
 /////////////////////////////////
 
-export const fetchProduct = createAsyncThunk('content/fetchProduct', async (_, { rejectWithValue }) => {
-    try {
-        const res = await getProduct();
-        if (res?.data?.status === STATUS.OK) {
-            return res?.data?.data;
-        } else {
-            return rejectWithValue(getResponseErrorMessage(res));
+export const fetchProduct = createAsyncThunk(
+    'content/fetchProduct',
+    async (searchText: NullableString | undefined = null, { rejectWithValue }) => {
+        try {
+            const res =
+                searchText === null || searchText === ''
+                    ? await getProduct()
+                    : await findProduct(searchText);
+            if (res?.data?.status === STATUS.OK) {
+                return res?.data?.data;
+            } else if (res?.data?.status === STATUS.NOT_FOUND) {
+                return [];
+            } else {
+                return rejectWithValue(getResponseErrorMessage(res));
+            }
+        } catch (e) {
+            return rejectWithValue(getApiErrorMessage('unknown error'));
         }
-    } catch (e) {
-        return rejectWithValue(getApiErrorMessage('unknown error'));
-    }
-});
+    },
+);
 
 export const fetchCategory = createAsyncThunk('content/fetchCategory', async (_, { rejectWithValue }) => {
     try {

@@ -15,4 +15,6 @@ export const contentAPI: AxiosInstance = axios.create({
 });
 
 export const getProduct = () => contentAPI.get<BasicResponse<ProductStateI[]>>(ep.PRODUCT);
+export const findProduct = (searchText: string) =>
+    contentAPI.get<BasicResponse<ProductStateI[]>>(ep.PRODUCT_SEARCH + searchText);
 export const getCategory = () => contentAPI.get<BasicResponse<CategoryStateI[]>>(ep.CATEGORY);
