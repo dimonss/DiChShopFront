@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import color from 'layout/colors';
+import colors from 'layout/colors';
 import transitions from 'layout/transitions';
 import Box from '@mui/material/Box';
 import useWindowSize from 'hooks/useWindowSize';
@@ -22,7 +22,7 @@ const SideNavBar = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-around',
-                background: color.sideNavBarBG,
+                background: colors.sideNavBarBG,
                 position: 'fixed',
                 bottom: '78px',
                 left: `${window.innerWidth <= 425 ? 0 : window.innerWidth / 2 - 212}px`,
@@ -34,7 +34,7 @@ const SideNavBar = () => {
                 <Box
                     key={index}
                     sx={{
-                        color: activePage === index ? color.iconActiveColor : color.iconDefaultColor,
+                        color: activePage === index ? colors.iconActiveColor : colors.iconDefaultColor,
                         ...transitions.color,
                         writingMode: 'vertical-rl',
                         rotate: '180deg',

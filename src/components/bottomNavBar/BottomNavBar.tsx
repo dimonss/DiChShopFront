@@ -4,7 +4,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import color from 'layout/colors';
+import colors from 'layout/colors';
 import transitions from 'layout/transitions';
 import URLS from 'constants/urls';
 import { Link } from 'react-router-dom';
@@ -24,8 +24,8 @@ const BottomNavBar = () => {
             sx={{
                 position: 'fixed',
                 bottom: '0px',
-                background: color.primary,
-                boxShadow: `0px 0px 20px ${color.iconActiveColor}`,
+                background: colors.primary,
+                boxShadow: `0px 0px 20px ${colors.iconActiveColor}`,
                 zIndex: 1,
                 maxWidth: '100%',
                 width: '425px',
@@ -41,7 +41,7 @@ const BottomNavBar = () => {
                             key={index}
                             fontSize="large"
                             sx={{
-                                color: activePage === 0 ? color.iconActiveColor : color.iconDefaultColor,
+                                color: activePage === 0 ? colors.iconActiveColor : colors.iconDefaultColor,
                                 padding: '8px',
                                 ...transitions.color,
                             }}

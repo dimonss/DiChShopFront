@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
 import coffeeImage from 'images/content/coffee.png';
 import colors from 'layout/colors';
-import color from 'layout/colors';
 import AddIcon from '@mui/icons-material/Add';
 import LocalLoader, { LOCAL_LOADER_SIZES } from 'components/reusable/loaders/LocalLoader';
+import { Link } from 'react-router-dom';
+import URLS from 'constants/urls';
+import config from 'config';
+import Swal from 'sweetalert2';
+import strings from 'constants/strings';
 
 interface PropI {
+    id: number;
     image: string;
     name: string;
     cost: number;
@@ -16,12 +21,23 @@ interface PropI {
 }
 
 const CardProduct: React.FC<PropI> = ({
+    id = 0,
     image = coffeeImage,
     name = 'Отсутствует',
     cost = 0,
     rating = 0,
     isLoading = true,
 }) => {
+    const addToCart = useCallback(() => {
+        Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: strings.item_successfully_added_to_cart,
+            showConfirmButton: false,
+            timer: 1500,
+            color: colors.sideNavBarBG,
+        });
+    }, []);
     return (
         <Box
             p="14px"
@@ -34,7 +50,22 @@ const CardProduct: React.FC<PropI> = ({
                 justifyContent: 'space-between',
                 height: '220px',
                 cursor: 'pointer',
+                position: 'relative',
             }}>
+            {' '}
+            {isLoading || (
+                <Link
+                    to={URLS.PRODUCT_RAW + id}
+                    style={{
+                        height: '190px',
+                        position: 'absolute',
+                        width: '100%',
+                        zIndex: 1,
+                        left: '0px',
+                        top: '0px',
+                    }}
+                />
+            )}
             <Box mb={'14px'} sx={{ overflow: 'hidden', position: 'relative' }}>
                 {isLoading ? (
                     <LocalLoader size={LOCAL_LOADER_SIZES.M} />
@@ -53,7 +84,12 @@ const CardProduct: React.FC<PropI> = ({
                             }}
                         />
                         <Box
-                            sx={{ display: 'flex', position: 'absolute', fontSize: '10px', left: '6px' }}>
+                            sx={{
+                                display: 'flex',
+                                position: 'absolute',
+                                fontSize: '10px',
+                                left: '6px',
+                            }}>
                             <StarIcon fontSize="small" sx={{ width: '14px', color: colors.yellow }} />
                             <Box
                                 sx={{
@@ -74,7 +110,7 @@ const CardProduct: React.FC<PropI> = ({
                                 borderRadius: '15px',
                                 overflow: 'hidden',
                                 padding: '0',
-                                backgroundImage: `url(http://127.0.0.1/static/${image})`,
+                                backgroundImage: `url(${config.STATIC_PATH}${image})`,
                                 backgroundPosition: 'center center',
                                 backgroundSize: 'cover',
                             }}
@@ -90,7 +126,7 @@ const CardProduct: React.FC<PropI> = ({
                     display: 'flex',
                     position: 'relative',
                     width: '100%',
-                    background: color.costBG,
+                    background: colors.costBG,
                     alignItems: 'center',
                     borderRadius: '8px',
                     height: '34px',
@@ -107,6 +143,7 @@ const CardProduct: React.FC<PropI> = ({
                     <b>{isLoading ? <LocalLoader size={LOCAL_LOADER_SIZES.XS} /> : cost + 'c'}</b>
                 </Box>
                 <Box
+                    onClick={addToCart}
                     sx={{
                         flexGrow: '1',
                         display: 'flex',

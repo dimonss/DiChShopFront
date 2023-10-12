@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
 import { Container, Grid } from '@mui/material';
 import AboutUser from 'components/aboutUser/AboutUser';
-import CardProduct from 'components/cardProduct/CardProduct';
+import CardProduct from 'components/product/CardProduct';
 import SearchInput from 'components/reusable/searchInput/SearchInput';
 import SideNavBar from 'components/sideNavBar/SideNavBar';
 import { useAppDispatch, useAppSelector } from 'types/globalTypes';
 import { fetchProduct } from 'redux/slices/contentSlice';
-import {useSearchParams} from "react-router-dom";
+import { useSearchParams } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import colors from 'layout/colors';
+import strings from 'constants/strings';
 
 const Content = () => {
     const dispatch = useAppDispatch();
@@ -25,16 +28,32 @@ const Content = () => {
             <AboutUser />
             <SearchInput />
             <Grid sx={{ display: 'grid', gridTemplateColumns: '50% 50%', margin: '20px 0 90px 46px' }}>
-                {product.map((item) => (
+                {isLoading && (
                     <CardProduct
-                        key={item.id}
+                        key={-1}
+                        id={-1}
                         rating={4.9}
-                        image={item.img}
-                        name={item.title}
-                        cost={item.sellingPrice}
-                        isLoading={isLoading}
+                        image={''}
+                        name={''}
+                        cost={-1}
+                        isLoading={true}
                     />
-                ))}
+                )}
+                {product.length ? (
+                    product.map((item) => (
+                        <CardProduct
+                            key={item.id}
+                            id={item.id}
+                            rating={4.9}
+                            image={item.img}
+                            name={item.title}
+                            cost={item.sellingPrice}
+                            isLoading={isLoading}
+                        />
+                    ))
+                ) : (
+                    <Box sx={{ color: colors.iconActiveColor }}>{strings.nothing_found}</Box>
+                )}
             </Grid>
             <SideNavBar />
         </Container>

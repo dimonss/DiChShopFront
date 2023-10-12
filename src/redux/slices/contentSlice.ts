@@ -1,5 +1,5 @@
 import { ActionReducerMapBuilder, AsyncThunk, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { STATUS } from 'api/statuses';
+import { API_RESPONSE_STATUS } from 'api/statuses';
 import { getApiErrorMessage, getResponseErrorMessage } from 'api/utils';
 import { findProduct, getCategory, getProduct } from 'api/contentAPI';
 import { ContentAsyncActions, ContentStateI } from 'redux/types/contentTypes';
@@ -30,9 +30,9 @@ export const fetchProduct = createAsyncThunk(
                 searchText === null || searchText === ''
                     ? await getProduct()
                     : await findProduct(searchText);
-            if (res?.data?.status === STATUS.OK) {
+            if (res?.data?.status === API_RESPONSE_STATUS.OK) {
                 return res?.data?.data;
-            } else if (res?.data?.status === STATUS.NOT_FOUND) {
+            } else if (res?.data?.status === API_RESPONSE_STATUS.NOT_FOUND) {
                 return [];
             } else {
                 return rejectWithValue(getResponseErrorMessage(res));
@@ -46,7 +46,7 @@ export const fetchProduct = createAsyncThunk(
 export const fetchCategory = createAsyncThunk('content/fetchCategory', async (_, { rejectWithValue }) => {
     try {
         const res = await getCategory();
-        if (res?.data?.status === STATUS?.OK) {
+        if (res?.data?.status === API_RESPONSE_STATUS?.OK) {
             return res?.data?.data;
         } else {
             return rejectWithValue(getCategory());

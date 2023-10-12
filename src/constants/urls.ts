@@ -3,5 +3,7 @@ const URLS = {
     CART: '/cart',
     FAVORITE: '/favorite',
     NOTIFICATIONS: '/notifications',
-}
-export default URLS
+    PRODUCT_RAW: '/product/',
+    PRODUCT: '/product/:id',
+};
+export default URLS;

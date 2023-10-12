@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { PayloadAction } from '@reduxjs/toolkit/dist/createAction';
 import { UserStateI } from 'redux/types/userTypes';
 import { getClient } from 'api/userAPI';
-import { STATUS } from 'api/statuses';
+import { API_RESPONSE_STATUS } from 'api/statuses';
 
 const initialState: UserStateI = {
     firstname: '',
@@ -16,7 +16,7 @@ const initialState: UserStateI = {
 export const loginUser = createAsyncThunk('user/login', async (id: number, { rejectWithValue }) => {
     try {
         const response = await getClient(id);
-        if (response.data.status === STATUS.OK) {
+        if (response.data.status === API_RESPONSE_STATUS.OK) {
             return response.data.data;
         } else {
             return rejectWithValue('unknown error');

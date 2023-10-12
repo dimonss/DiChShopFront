@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import brewImage from 'images/Brew.png';
 import { useAppDispatch, useAppSelector } from 'types/globalTypes';
 import { loginUser } from 'redux/slices/userSlice';
+import config from 'config';
 
 const AboutUser = () => {
     const dispatch = useAppDispatch();
@@ -31,7 +32,7 @@ const AboutUser = () => {
                             height: '50px',
                             width: '50px',
                         }}
-                        src={'http://127.0.0.1/static/' + userData?.photo}
+                        src={config.STATIC_PATH + userData?.photo}
                     />
                 </Box>
             </Box>

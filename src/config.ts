@@ -6,15 +6,17 @@ const defaultConfig: Config = {
     isProduction: () => process.env.BUILD_TYPE === BuildType.PRODUCTION,
     isDev: () => process.env.BUILD_TYPE === BuildType.DEVELOPMENT,
     API_URL: 'http://127.0.0.1:4000/',
+    STATIC_PATH: 'http://127.0.0.1/static/',
 };
 
 const buildTypeConfigs: BuildTypesScheme = {
     development: {
         BUILD_TYPE: BuildType.DEVELOPMENT,
         API_URL: 'http://127.0.0.1:4000/',
+        STATIC_PATH: 'http://127.0.0.1/static/',
     },
-    production: {
-        BUILD_TYPE: BuildType.PRODUCTION,
+    stage: {
+
     },
 };
 

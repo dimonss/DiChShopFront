@@ -10,6 +10,7 @@ export interface Config {
     isProduction: () => boolean;
     isDev: () => boolean;
     API_URL: string;
+    STATIC_PATH: string;
 }
 
 interface OverridableConfig extends Partial<Config> {}

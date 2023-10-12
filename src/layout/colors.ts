@@ -6,5 +6,8 @@ const colors = {
     cardBG: '#362C36',
     costBG: '#463D46',
     yellow: '#D3A501',
-}
-export default colors
+    white: '#FFFFFF',
+    red: '#C94C4C',
+    text: '#4A2B29',
+};
+export default colors;
