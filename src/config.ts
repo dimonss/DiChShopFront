@@ -7,6 +7,7 @@ const defaultConfig: Config = {
     isDev: () => process.env.BUILD_TYPE === BuildType.DEVELOPMENT,
     API_URL: 'http://127.0.0.1:4000/',
     STATIC_PATH: 'http://127.0.0.1/static/',
+    BOT_NAME: 'DiChAdminBot'
 };
 
 const buildTypeConfigs: BuildTypesScheme = {
@@ -14,6 +15,7 @@ const buildTypeConfigs: BuildTypesScheme = {
         BUILD_TYPE: BuildType.DEVELOPMENT,
         API_URL: 'http://127.0.0.1:4000/',
         STATIC_PATH: 'http://127.0.0.1/static/',
+        BOT_NAME: 'DiChAdminBot'
     },
     stage: {
 

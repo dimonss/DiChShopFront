@@ -3,6 +3,7 @@ export interface UserStateI {
     lastname: string;
     login: string;
     photo: string;
+    token: string;
     loggedIn: boolean;
     loading: boolean;
 }

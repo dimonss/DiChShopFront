@@ -4,6 +4,7 @@ import { getApiErrorMessage, getResponseErrorMessage } from 'api/utils';
 import { findProduct, getCategory, getProduct } from 'api/contentAPI';
 import { ContentAsyncActions, ContentStateI } from 'redux/types/contentTypes';
 import { NullableString } from 'types/globalTypes';
+import { findProductWithAuth, getProductWithAuth } from 'api/privateAPI';
 
 const initialState: ContentStateI = {
     product: [],
@@ -24,11 +25,18 @@ export const trackActionState = (
 
 export const fetchProduct = createAsyncThunk(
     'content/fetchProduct',
-    async (searchText: NullableString | undefined = null, { rejectWithValue }) => {
+    async (
+        { searchText = null, loggedIn }: { searchText: NullableString | undefined; loggedIn: boolean },
+        { rejectWithValue },
+    ) => {
         try {
             const res =
                 searchText === null || searchText === ''
-                    ? await getProduct()
+                    ? loggedIn
+                        ? await getProductWithAuth()
+                        : await getProduct()
+                    : loggedIn
+                    ? await findProductWithAuth(searchText)
                     : await findProduct(searchText);
             if (res?.data?.status === API_RESPONSE_STATUS.OK) {
                 return res?.data?.data;

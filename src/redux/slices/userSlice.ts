@@ -9,13 +9,14 @@ const initialState: UserStateI = {
     lastname: '',
     login: '',
     photo: '',
+    token: '',
     loggedIn: false,
     loading: false,
 };
 
-export const loginUser = createAsyncThunk('user/login', async (id: number, { rejectWithValue }) => {
+export const loginUser = createAsyncThunk('user/login', async (token: string, { rejectWithValue }) => {
     try {
-        const response = await getClient(id);
+        const response = await getClient(token);
         if (response.data.status === API_RESPONSE_STATUS.OK) {
             return response.data.data;
         } else {
@@ -37,12 +38,13 @@ export const userSlice = createSlice({
             state.loading = true;
         });
         builder.addCase(loginUser.fulfilled, (state, { payload }: PayloadAction<UserStateI>) => {
-            const { firstname, lastname, login, photo } = payload;
+            const { firstname, lastname, login, photo, token } = payload;
             state.firstname = firstname;
             state.lastname = lastname;
             state.login = login;
             state.photo = photo;
             state.loggedIn = true;
+            state.token = token;
         });
         builder.addCase(loginUser.rejected, (state) => {
             state.loading = false;

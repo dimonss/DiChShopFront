@@ -13,15 +13,16 @@ import strings from 'constants/strings';
 
 const Content = () => {
     const dispatch = useAppDispatch();
-    const [product, isLoading] = useAppSelector((store) => [
+    const [product, isLoading, loggedIn] = useAppSelector((store) => [
         store?.content?.product,
         store?.loading?.product,
+        store?.user?.loggedIn,
     ]);
     const [params] = useSearchParams();
 
     useEffect(() => {
-        dispatch(fetchProduct(params.get('search')));
-    }, [params.get('search')]);
+        dispatch(fetchProduct({ searchText: params.get('search'), loggedIn }));
+    }, [params.get('search'), loggedIn]);
 
     return (
         <Container>
@@ -44,11 +45,13 @@ const Content = () => {
                         <CardProduct
                             key={item.id}
                             id={item.id}
-                            rating={4.9}
+                            rating={item.rating}
                             image={item.img}
                             name={item.title}
                             cost={item.sellingPrice}
                             isLoading={isLoading}
+                            loggedIn={loggedIn}
+                            inCart={item?.inCart}
                         />
                     ))
                 ) : (

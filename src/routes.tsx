@@ -11,12 +11,17 @@ const routes = [
         children: [
             {
                 path: '/cappuccino',
-                element: <h3>{'qwer'}</h3>,
+                element: <h3>{'cappuccino'}</h3>,
                 errorElement: <h1>ERROR_LECEL_2</h1>,
             },
             {
                 path: '/cart',
-                element: <h3>{'qwer'}</h3>,
+                element: <h3>{'cart'}</h3>,
+                errorElement: <h1>ERROR_LECEL_2</h1>,
+            },
+            {
+                path: '/favorite',
+                element: <h3>{'favorite'}</h3>,
                 errorElement: <h1>ERROR_LECEL_2</h1>,
             },
         ],

@@ -11,6 +11,7 @@ export interface Config {
     isDev: () => boolean;
     API_URL: string;
     STATIC_PATH: string;
+    BOT_NAME: string;
 }
 
 interface OverridableConfig extends Partial<Config> {}

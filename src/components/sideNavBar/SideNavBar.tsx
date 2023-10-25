@@ -7,10 +7,11 @@ import { useAppDispatch, useAppSelector } from 'types/globalTypes';
 import { fetchCategory } from 'redux/slices/contentSlice';
 
 const SideNavBar = () => {
+    const { loggedIn } = useAppSelector((state) => state?.user);
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(fetchCategory());
-    }, []);
+    }, [loggedIn]);
     useWindowSize();
     const [activePage, setActivePage] = useState(0);
     const categories = useAppSelector((state) => state?.content?.category);

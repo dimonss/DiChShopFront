@@ -6,6 +6,13 @@ const strings = {
     item_successfully_deleted_to_favorite: 'Товар успешно удален из любимых',
     add_to_cart: 'Добавить в корзину',
     nothing_found: 'Ничего не найдено',
+    unknown_error: 'Неизвестная ошибка',
+    no_internet_connection: 'Интернет соединение отсутствует',
+    are_yoy_sure_logout: 'Вы уверены что хотите выйти из аккаунта?',
+    cancel: 'Отмена',
+    yes_logout: 'Да выйти',
+    you_are_not_authorized: 'Вы не авторизованы',
+    open_bot: 'Открыть бота',
 };
 
 export default strings;

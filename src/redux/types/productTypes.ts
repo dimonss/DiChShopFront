@@ -6,4 +6,7 @@ export interface ProductStateI {
     price?: number;
     sellingPrice: number;
     img: string;
+    rating: number;
+    inCart?: boolean;
+    favorite?: boolean;
 }

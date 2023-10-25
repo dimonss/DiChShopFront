@@ -13,4 +13,5 @@ export const contentAPI: AxiosInstance = axios.create({
     },
 });
 
-export const getClient = (id: number) => contentAPI.get<BasicResponse<UserStateI>>(ep.CLIENT + `/${id}`);
+export const getClient = (token: string) =>
+    contentAPI.get<BasicResponse<UserStateI>>(ep.CLIENT, { headers: { auth: token } });
