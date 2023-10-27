@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container, Grid } from '@mui/material';
-import AboutUser from 'components/aboutUser/AboutUser';
+import { Grid } from '@mui/material';
 import CardProduct from 'components/product/CardProduct';
 import SearchInput from 'components/reusable/searchInput/SearchInput';
 import SideNavBar from 'components/sideNavBar/SideNavBar';
@@ -25,8 +24,7 @@ const Content = () => {
     }, [params.get('search'), loggedIn]);
 
     return (
-        <Container>
-            <AboutUser />
+        <>
             <SearchInput />
             <Grid sx={{ display: 'grid', gridTemplateColumns: '50% 50%', margin: '20px 0 90px 46px' }}>
                 {isLoading && (
@@ -59,7 +57,7 @@ const Content = () => {
                 )}
             </Grid>
             <SideNavBar />
-        </Container>
+        </>
     );
 };
 

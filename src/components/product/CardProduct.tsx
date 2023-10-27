@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
 import coffeeImage from 'images/content/coffee.png';
@@ -7,14 +7,12 @@ import LocalLoader, { LOCAL_LOADER_SIZES } from 'components/reusable/loaders/Loc
 import { Link } from 'react-router-dom';
 import URLS from 'constants/urls';
 import config from 'config';
-import Swal from 'sweetalert2';
 import strings from 'constants/strings';
-import { addToCart, deleteFromCart } from 'api/privateAPI';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import CircularProgress from '@mui/material/CircularProgress';
-import { API_RESPONSE_STATUS } from 'api/statuses';
 import useLoginAlert from 'hooks/useLoginAlert';
+import useCartOperations from 'hooks/cart/useCartOperations';
 
 interface PropI {
     id: number;
@@ -37,94 +35,9 @@ const CardProduct: React.FC<PropI> = ({
     inCart = false,
     loggedIn,
 }) => {
-    const [addingToCartIsLoading, setAddingToCartIsLoading] = useState(false);
-    const [localInCart, setLocalInCart] = useState(inCart);
-    useEffect(() => {
-        setLocalInCart(inCart);
-    }, [inCart]);//todo fix crutch
-
+    const { addProductToCart, deleteProductFromCart, addingToCartIsLoading, localInCart } =
+        useCartOperations({ id, inCart });
     const { loginAlert } = useLoginAlert(strings.you_are_not_authorized);
-
-    const addToCartCallback = useCallback(async () => {
-        setAddingToCartIsLoading(true);
-        await addToCart(id)
-            .then((res) => {
-                if (res?.data?.status === API_RESPONSE_STATUS.OK) {
-                    setLocalInCart(true);
-                    Swal.fire({
-                        position: 'top',
-                        icon: 'success',
-                        title: res?.data?.message,
-                        showConfirmButton: false,
-                        timer: 1500,
-                        color: colors.sideNavBarBG,
-                    });
-                } else {
-                    Swal.fire({
-                        position: 'top',
-                        icon: 'success',
-                        title: res?.data?.message,
-                        showConfirmButton: false,
-                        timer: 1500,
-                        color: colors.sideNavBarBG,
-                    });
-                }
-            })
-            .catch((e) => {
-                Swal.fire({
-                    position: 'top',
-                    icon: 'error',
-                    title: e?.response?.data?.message || strings.unknown_error,
-                    showConfirmButton: false,
-                    timer: 1500,
-                    color: colors.sideNavBarBG,
-                });
-            })
-            .finally(() => {
-                setAddingToCartIsLoading(false);
-            });
-    }, []);
-    const deleteFromCartCallback = useCallback(async () => {
-        setAddingToCartIsLoading(true);
-        await deleteFromCart(id)
-            .then((res) => {
-                console.log(res);
-                if (res?.data?.status === API_RESPONSE_STATUS.OK) {
-                    setLocalInCart(false);
-                    Swal.fire({
-                        position: 'top',
-                        icon: 'success',
-                        title: res?.data?.message,
-                        showConfirmButton: false,
-                        timer: 1500,
-                        color: colors.sideNavBarBG,
-                    });
-                } else {
-                    Swal.fire({
-                        position: 'top',
-                        icon: 'success',
-                        title: res?.data?.message,
-                        showConfirmButton: false,
-                        timer: 1500,
-                        color: colors.sideNavBarBG,
-                    });
-                }
-            })
-            .catch((e) => {
-                console.log(e);
-                Swal.fire({
-                    position: 'top',
-                    icon: 'error',
-                    title: e?.response?.data?.message || strings.unknown_error,
-                    showConfirmButton: false,
-                    timer: 1500,
-                    color: colors.sideNavBarBG,
-                });
-            })
-            .finally(() => {
-                setAddingToCartIsLoading(false);
-            });
-    }, []);
 
     return (
         <Box
@@ -232,7 +145,7 @@ const CardProduct: React.FC<PropI> = ({
                 </Box>
                 <Box
                     onClick={
-                        loggedIn ? (localInCart ? deleteFromCartCallback : addToCartCallback) : loginAlert
+                        loggedIn ? (localInCart ? deleteProductFromCart : addProductToCart) : loginAlert
                     }
                     sx={{
                         flexGrow: '1',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import { Container, Grid } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -17,7 +17,7 @@ const links = [
 ];
 
 const BottomNavBar = () => {
-    const [activePage, setActivePage] = useState(0);
+    const pathname = window.location?.pathname;
     return (
         <Container
             fixed
@@ -41,12 +41,12 @@ const BottomNavBar = () => {
                             key={index}
                             fontSize="large"
                             sx={{
-                                color: activePage === 0 ? colors.iconActiveColor : colors.iconDefaultColor,
+                                color:
+                                    item?.link === pathname
+                                        ? colors.iconActiveColor
+                                        : colors.iconDefaultColor,
                                 padding: '8px',
                                 ...transitions.color,
-                            }}
-                            onClick={() => {
-                                setActivePage(index);
                             }}
                         />
                     </Link>

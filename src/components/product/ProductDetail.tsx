@@ -13,23 +13,19 @@ import GoBackButton from 'components/reusable/buttons/GoBackButton';
 import strings from 'constants/strings';
 import Swal from 'sweetalert2';
 import LocalLoader, { LOCAL_LOADER_SIZES } from 'components/reusable/loaders/LocalLoader';
+import useLoginAlert from 'hooks/useLoginAlert';
+import useCartOperations from 'hooks/cart/useCartOperations';
+import { useAppSelector } from 'types/globalTypes';
+import { getProductByIdWithAuth } from 'api/privateAPI';
+import { PRODUCT_DEFAULT_VALUES } from 'constants/globalConstants';
 
 const ProductDetail = () => {
+    const { loggedIn } = useAppSelector((state) => state?.user);
     const [isFavorite, setIsFavorite] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
-    const [data, setData] = useState<ProductStateI>();
+    const [data, setData] = useState<ProductStateI>(PRODUCT_DEFAULT_VALUES);
     const params = useParams();
-    const addToCart = useCallback(() => {
-        Swal.fire({
-            position: 'top',
-            icon: 'success',
-            title: strings.item_successfully_added_to_cart,
-            showConfirmButton: false,
-            timer: 1500,
-            color: colors.sideNavBarBG,
-        });
-    }, []);
     const changeFavoriteStatus = useCallback(() => {
         setIsFavorite((prev) => {
             Swal.fire({
@@ -46,20 +42,31 @@ const ProductDetail = () => {
         });
     }, [isFavorite]);
     useEffect(() => {
-        setIsLoading(true);
-        getProductById(params?.id || '1')
-            .then((res) => {
+        if (params?.id?.length) {
+            setIsLoading(true);
+            const res = loggedIn
+                ? getProductByIdWithAuth(params?.id || '1')
+                : getProductById(params?.id || '1');
+            res.then((res) => {
                 if (res?.data?.status === API_RESPONSE_STATUS?.OK) {
                     setData(res?.data?.data);
+                } else {
+                    setError(true);
                 }
             })
-            .catch(() => {
-                setError(true);
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
+                .catch(() => {
+                    setError(true);
+                })
+                .finally(() => {
+                    setIsLoading(false);
+                });
+        } else {
+            setError(true);
+        }
     }, []);
+    const { loginAlert } = useLoginAlert(strings.you_are_not_authorized);
+    const { addProductToCart, deleteProductFromCart, addingToCartIsLoading, localInCart } =
+        useCartOperations(data);
     return (
         <Box
             p="14px"
@@ -154,8 +161,7 @@ const ProductDetail = () => {
                                 alignItems: 'center',
                                 marginLeft: '4px',
                             }}>
-                            {4.5}
-                            {/*//todo get Rating*/}
+                            {data?.rating}
                         </Box>
                     </Box>
                 </Box>
@@ -176,7 +182,9 @@ const ProductDetail = () => {
                     </Box>
                 </Box>
                 <Box
-                    onClick={addToCart}
+                    onClick={
+                        loggedIn ? (localInCart ? deleteProductFromCart : addProductToCart) : loginAlert
+                    }
                     sx={{
                         display: 'flex',
                         justifyContent: 'center',
@@ -189,10 +197,10 @@ const ProductDetail = () => {
                         fontSize: '16px',
                         height: '45px',
                     }}>
-                    {isLoading ? (
+                    {isLoading || addingToCartIsLoading ? (
                         <LocalLoader size={LOCAL_LOADER_SIZES.XS} />
                     ) : (
-                        <b>{strings.add_to_cart}</b>
+                        <b>{localInCart ? strings.delete_from_cart : strings.add_to_cart}</b>
                     )}
                 </Box>
             </Box>

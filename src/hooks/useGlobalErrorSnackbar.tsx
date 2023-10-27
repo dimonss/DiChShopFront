@@ -5,6 +5,7 @@ import { ErrorKeys } from 'redux/types/errorTypes';
 import { useSnackbar } from 'notistack';
 import strings from 'constants/strings';
 import useNetworkStatus from 'hooks/useNetworkStatus';
+import SignalWifiConnectedNoInternet4Icon from '@mui/icons-material/SignalWifiConnectedNoInternet4';
 
 const UseGlobalErrorSnackbar = () => {
     const dispatch = useAppDispatch();
@@ -24,10 +25,17 @@ const UseGlobalErrorSnackbar = () => {
 
     useEffect(() => {
         if (!isOnline) {
-            enqueueSnackbar(strings.no_internet_connection, {
-                variant: 'error',
-                persist: true,
-            });
+            enqueueSnackbar(
+                <b>
+                    <SignalWifiConnectedNoInternet4Icon sx={{ margin: '0px 20px -6px 0px' }} />
+                    {strings.no_internet_connection}{' '}
+                </b>,
+                {
+                    variant: 'error',
+                    persist: true,
+                    hideIconVariant: true,
+                },
+            );
         } else closeSnackbar();
     }, [isOnline]);
 };

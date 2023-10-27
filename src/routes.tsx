@@ -2,6 +2,9 @@ import App from 'components/App';
 import ProductDetail from 'components/product/ProductDetail';
 import React from 'react';
 import URLS from 'constants/urls';
+import AboutUser from 'components/aboutUser/AboutUser';
+import Content from 'components/content/Content';
+import { Container } from '@mui/material';
 
 const routes = [
     {
@@ -10,18 +13,28 @@ const routes = [
         errorElement: <h1>ERROR</h1>,
         children: [
             {
-                path: '/cappuccino',
-                element: <h3>{'cappuccino'}</h3>,
+                path: '/',
+                element: (
+                    <Container>
+                        <AboutUser />
+                        <Content />
+                    </Container>
+                ),
                 errorElement: <h1>ERROR_LECEL_2</h1>,
             },
             {
-                path: '/cart',
+                path: 'cart',
                 element: <h3>{'cart'}</h3>,
                 errorElement: <h1>ERROR_LECEL_2</h1>,
             },
             {
-                path: '/favorite',
+                path: 'favorite',
                 element: <h3>{'favorite'}</h3>,
+                errorElement: <h1>ERROR_LECEL_2</h1>,
+            },
+            {
+                path: 'notifications',
+                element: <h3>{'notifications'}</h3>,
                 errorElement: <h1>ERROR_LECEL_2</h1>,
             },
         ],

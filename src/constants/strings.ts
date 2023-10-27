@@ -5,6 +5,7 @@ const strings = {
     item_successfully_added_to_favorite: 'Товар успешно добавлен в любимые',
     item_successfully_deleted_to_favorite: 'Товар успешно удален из любимых',
     add_to_cart: 'Добавить в корзину',
+    delete_from_cart: 'Удалить из корзины',
     nothing_found: 'Ничего не найдено',
     unknown_error: 'Неизвестная ошибка',
     no_internet_connection: 'Интернет соединение отсутствует',
@@ -13,6 +14,7 @@ const strings = {
     yes_logout: 'Да выйти',
     you_are_not_authorized: 'Вы не авторизованы',
     open_bot: 'Открыть бота',
+    you_are_success_authorized: 'Вы успешно авторизовались',
 };
 
 export default strings;

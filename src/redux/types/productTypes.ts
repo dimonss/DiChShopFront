@@ -2,7 +2,7 @@ export interface ProductStateI {
     id: number;
     title: string;
     subtitle: string;
-    description: boolean;
+    description: string;
     price?: number;
     sellingPrice: number;
     img: string;

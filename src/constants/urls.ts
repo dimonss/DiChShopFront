@@ -1,5 +1,5 @@
 const URLS = {
-    HOME: '/home',
+    HOME: '/',
     CART: '/cart',
     FAVORITE: '/favorite',
     NOTIFICATIONS: '/notifications',

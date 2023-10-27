@@ -16,6 +16,8 @@ export const findProductWithAuth = (searchText: string) =>
     privateAPI.get<BasicResponse<ProductStateI[]>>(ep.PRODUCT_SEARCH_WITH_AUTH + searchText);
 export const getProductWithAuth = () =>
     privateAPI.get<BasicResponse<ProductStateI>>(ep.PRODUCT_WITH_AUTH);
+export const getProductByIdWithAuth = (id: string) =>
+    privateAPI.get<BasicResponse<ProductStateI>>(ep.PRODUCT_WITH_AUTH + id);
 
 //CART
 export const getCart = () => privateAPI.get<BasicResponse<ProductStateI>>(ep.CART);
