@@ -28,7 +28,7 @@ const UseGlobalErrorSnackbar = () => {
             enqueueSnackbar(
                 <b>
                     <SignalWifiConnectedNoInternet4Icon sx={{ margin: '0px 20px -6px 0px' }} />
-                    {strings.no_internet_connection}{' '}
+                    {strings.no_internet_connection}
                 </b>,
                 {
                     variant: 'error',

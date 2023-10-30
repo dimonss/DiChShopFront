@@ -35,7 +35,7 @@ const CardProduct: React.FC<PropI> = ({
     inCart = false,
     loggedIn,
 }) => {
-    const { addProductToCart, deleteProductFromCart, addingToCartIsLoading, localInCart } =
+    const { addProductToCart, deleteProductFromCart, cartOperationsIsLoading, localInCart } =
         useCartOperations({ id, inCart });
     const { loginAlert } = useLoginAlert(strings.you_are_not_authorized);
 
@@ -53,7 +53,6 @@ const CardProduct: React.FC<PropI> = ({
                 cursor: 'pointer',
                 position: 'relative',
             }}>
-            {' '}
             {isLoading || (
                 <Link
                     to={URLS.PRODUCT_RAW + id}
@@ -161,7 +160,7 @@ const CardProduct: React.FC<PropI> = ({
                         minWidth: '22px',
                         height: '22px',
                     }}>
-                    {addingToCartIsLoading ? (
+                    {cartOperationsIsLoading ? (
                         <CircularProgress color="inherit" size={'20px'} />
                     ) : localInCart ? (
                         <RemoveShoppingCartIcon />

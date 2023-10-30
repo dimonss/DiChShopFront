@@ -9,4 +9,5 @@ export interface ProductStateI {
     rating: number;
     inCart?: boolean;
     favorite?: boolean;
+    counter?: number;
 }

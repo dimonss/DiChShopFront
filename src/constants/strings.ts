@@ -15,6 +15,7 @@ const strings = {
     you_are_not_authorized: 'Вы не авторизованы',
     open_bot: 'Открыть бота',
     you_are_success_authorized: 'Вы успешно авторизовались',
+    place_order: 'Оформить заказ',
 };
 
 export default strings;

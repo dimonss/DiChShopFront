@@ -11,8 +11,8 @@ const App = () => {
     useGlobalErrorSnackbar();
     return (
         <Box className="App">
-            <BottomNavBar />
             <Outlet />
+            <BottomNavBar />
         </Box>
     );
 };

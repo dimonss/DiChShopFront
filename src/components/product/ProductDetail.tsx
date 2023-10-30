@@ -18,6 +18,8 @@ import useCartOperations from 'hooks/cart/useCartOperations';
 import { useAppSelector } from 'types/globalTypes';
 import { getProductByIdWithAuth } from 'api/privateAPI';
 import { PRODUCT_DEFAULT_VALUES } from 'constants/globalConstants';
+import useAuth from 'hooks/useAuth';
+import useGlobalErrorSnackbar from 'hooks/useGlobalErrorSnackbar';
 
 const ProductDetail = () => {
     const { loggedIn } = useAppSelector((state) => state?.user);
@@ -26,6 +28,13 @@ const ProductDetail = () => {
     const [error, setError] = useState(false);
     const [data, setData] = useState<ProductStateI>(PRODUCT_DEFAULT_VALUES);
     const params = useParams();
+
+    /////////////////////////////////////////////////
+    //TODO crutch hooks, already used in App
+    useAuth();
+    useGlobalErrorSnackbar();
+    /////////////////////////////////////////////////
+
     const changeFavoriteStatus = useCallback(() => {
         setIsFavorite((prev) => {
             Swal.fire({
@@ -65,7 +74,7 @@ const ProductDetail = () => {
         }
     }, []);
     const { loginAlert } = useLoginAlert(strings.you_are_not_authorized);
-    const { addProductToCart, deleteProductFromCart, addingToCartIsLoading, localInCart } =
+    const { addProductToCart, deleteProductFromCart, cartOperationsIsLoading, localInCart } =
         useCartOperations(data);
     return (
         <Box
@@ -197,7 +206,7 @@ const ProductDetail = () => {
                         fontSize: '16px',
                         height: '45px',
                     }}>
-                    {isLoading || addingToCartIsLoading ? (
+                    {isLoading || cartOperationsIsLoading ? (
                         <LocalLoader size={LOCAL_LOADER_SIZES.XS} />
                     ) : (
                         <b>{localInCart ? strings.delete_from_cart : strings.add_to_cart}</b>

@@ -1,4 +1,5 @@
 import App from 'components/App';
+import Cart from 'components/cart/Cart';
 import ProductDetail from 'components/product/ProductDetail';
 import React from 'react';
 import URLS from 'constants/urls';
@@ -24,7 +25,7 @@ const routes = [
             },
             {
                 path: 'cart',
-                element: <h3>{'cart'}</h3>,
+                element: <Cart />,
                 errorElement: <h1>ERROR_LECEL_2</h1>,
             },
             {

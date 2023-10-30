@@ -11,14 +11,14 @@ interface TypeI {
 }
 
 const useCartOperations = ({ id = -1, inCart = true }: TypeI) => {
-    const [addingToCartIsLoading, setAddingToCartIsLoading] = useState<boolean>(false);
+    const [cartOperationsIsLoading, setCartOperationsIsLoading] = useState<boolean>(false);
     const [localInCart, setLocalInCart] = useState<boolean>(inCart || false);
     useEffect(() => {
         setLocalInCart(inCart);
     }, [inCart]); //TODO cruth for update status inCart
 
     const addProductToCart = useCallback(async () => {
-        setAddingToCartIsLoading(true);
+        setCartOperationsIsLoading(true);
         await addToCart(id)
             .then((res) => {
                 if (res?.data?.status === API_RESPONSE_STATUS.OK) {
@@ -34,7 +34,7 @@ const useCartOperations = ({ id = -1, inCart = true }: TypeI) => {
                 } else {
                     Swal.fire({
                         position: 'top',
-                        icon: 'success',
+                        icon: 'error',
                         title: res?.data?.message,
                         showConfirmButton: false,
                         timer: 1500,
@@ -53,12 +53,12 @@ const useCartOperations = ({ id = -1, inCart = true }: TypeI) => {
                 });
             })
             .finally(() => {
-                setAddingToCartIsLoading(false);
+                setCartOperationsIsLoading(false);
             });
     }, [id]);
 
     const deleteProductFromCart = useCallback(async () => {
-        setAddingToCartIsLoading(true);
+        setCartOperationsIsLoading(true);
         await deleteFromCart(id)
             .then((res) => {
                 if (res?.data?.status === API_RESPONSE_STATUS.OK) {
@@ -74,7 +74,7 @@ const useCartOperations = ({ id = -1, inCart = true }: TypeI) => {
                 } else {
                     Swal.fire({
                         position: 'top',
-                        icon: 'success',
+                        icon: 'error',
                         title: res?.data?.message,
                         showConfirmButton: false,
                         timer: 1500,
@@ -93,10 +93,10 @@ const useCartOperations = ({ id = -1, inCart = true }: TypeI) => {
                 });
             })
             .finally(() => {
-                setAddingToCartIsLoading(false);
+                setCartOperationsIsLoading(false);
             });
     }, [id]);
 
-    return { addProductToCart, deleteProductFromCart, addingToCartIsLoading, localInCart };
+    return { addProductToCart, deleteProductFromCart, cartOperationsIsLoading, localInCart };
 };
 export default useCartOperations;
