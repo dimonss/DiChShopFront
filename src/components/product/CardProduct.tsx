@@ -66,7 +66,7 @@ const CardProduct: React.FC<PropI> = ({
                     }}
                 />
             )}
-            <Box mb={'14px'} sx={{ overflow: 'hidden', position: 'relative' }}>
+            <Box mb={'14px'} sx={{ overflow: 'hidden', position: 'relative', marginBottom: '0' }}>
                 {isLoading ? (
                     <LocalLoader size={LOCAL_LOADER_SIZES.M} />
                 ) : (
@@ -118,7 +118,9 @@ const CardProduct: React.FC<PropI> = ({
                     </>
                 )}
             </Box>
-            <Box mb={'14px'} sx={{ textAlign: 'left', fontSize: '16px' }}>
+            <Box
+                mb={'14px'}
+                sx={{ textAlign: 'left', fontSize: '16px', maxHeight: '55px', overflow: 'hidden' }}>
                 {isLoading ? 'Loading...' : name}
             </Box>
             <Box

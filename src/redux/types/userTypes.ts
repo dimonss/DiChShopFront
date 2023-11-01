@@ -6,4 +6,5 @@ export interface UserStateI {
     token: string;
     loggedIn: boolean;
     loading: boolean;
+    discount: number;
 }

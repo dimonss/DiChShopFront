@@ -23,14 +23,14 @@ const useCartOperations = ({ id = -1, inCart = true }: TypeI) => {
             .then((res) => {
                 if (res?.data?.status === API_RESPONSE_STATUS.OK) {
                     setLocalInCart(true);
-                    Swal.fire({
-                        position: 'top',
-                        icon: 'success',
-                        title: res?.data?.message,
-                        showConfirmButton: false,
-                        timer: 1500,
-                        color: colors.sideNavBarBG,
-                    });
+                    // Swal.fire({
+                    //     position: 'top',
+                    //     icon: 'success',
+                    //     title: res?.data?.message,
+                    //     showConfirmButton: false,
+                    //     timer: 1500,
+                    //     color: colors.sideNavBarBG,
+                    // });
                 } else {
                     Swal.fire({
                         position: 'top',
@@ -63,14 +63,14 @@ const useCartOperations = ({ id = -1, inCart = true }: TypeI) => {
             .then((res) => {
                 if (res?.data?.status === API_RESPONSE_STATUS.OK) {
                     setLocalInCart(false);
-                    Swal.fire({
-                        position: 'top',
-                        icon: 'success',
-                        title: res?.data?.message,
-                        showConfirmButton: false,
-                        timer: 1500,
-                        color: colors.sideNavBarBG,
-                    });
+                    // Swal.fire({
+                    //     position: 'top',
+                    //     icon: 'success',
+                    //     title: res?.data?.message,
+                    //     showConfirmButton: false,
+                    //     timer: 1500,
+                    //     color: colors.sideNavBarBG,
+                    // });
                 } else {
                     Swal.fire({
                         position: 'top',

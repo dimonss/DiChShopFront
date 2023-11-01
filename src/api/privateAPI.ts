@@ -25,10 +25,11 @@ export const addToCart = (productId: number) =>
     privateAPI.post<BasicResponse<ProductStateI>>(ep.CART + productId);
 export const deleteFromCart = (productId: number) =>
     privateAPI.delete<BasicResponse<ProductStateI>>(ep.CART + productId);
-export const incrementProduct = (productId: number) =>
+export const incrementProductInCart = (productId: number) =>
     privateAPI.patch<BasicResponse<number>>(ep.CART_INCREMENT + productId);
-export const decrementProduct = (productId: number) =>
+export const decrementProductInCart = (productId: number) =>
     privateAPI.patch<BasicResponse<number>>(ep.CART_DECREMENT + productId);
+export const buyCartCart = () => privateAPI.post<BasicResponse<number>>(ep.CART_BUY);
 
 //FAVORITE
 export const getFavorite = () => privateAPI.get<BasicResponse<ProductStateI>>(ep.FAVORITE);

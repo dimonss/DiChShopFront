@@ -13,6 +13,7 @@ const initialState: UserStateI = {
     token: '',
     loggedIn: false,
     loading: false,
+    discount: 0,
 };
 
 export const loginUser = createAsyncThunk(
@@ -46,13 +47,14 @@ export const userSlice = createSlice({
             state.loading = true;
         });
         builder.addCase(loginUser.fulfilled, (state, { payload }: PayloadAction<UserStateI>) => {
-            const { firstname, lastname, login, photo, token } = payload;
+            const { firstname, lastname, login, photo, token, discount } = payload;
             state.firstname = firstname;
             state.lastname = lastname;
             state.login = login;
             state.photo = photo;
             state.loggedIn = true;
             state.token = token;
+            state.discount = discount;
         });
         builder.addCase(loginUser.rejected, (state) => {
             state.loading = false;

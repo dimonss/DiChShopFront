@@ -7,4 +7,5 @@ export const CLIENT = 'client';
 export const CART = 'cart/';
 export const CART_INCREMENT = 'cart/increment/';
 export const CART_DECREMENT = 'cart/decrement/';
+export const CART_BUY = 'buyCart/';
 export const FAVORITE = 'favorite/';

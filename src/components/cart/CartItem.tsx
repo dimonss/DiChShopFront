@@ -5,12 +5,14 @@ import config from 'config';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { ReactComponent as DecrementIcon } from 'images/decrement.svg';
 import { ReactComponent as IncrementIcon } from 'images/increment.svg';
-import { decrementProduct, deleteFromCart, incrementProduct } from 'api/privateAPI';
+import { decrementProductInCart, deleteFromCart, incrementProductInCart } from 'api/privateAPI';
 import { API_RESPONSE_STATUS } from 'api/statuses';
-import Swal from 'sweetalert2';
-import strings from 'constants/strings';
 import { ProductStateI } from 'redux/types/productTypes';
 import LocalLoader, { LOCAL_LOADER_SIZES } from 'components/reusable/loaders/LocalLoader';
+import { getApiErrorMessage, getResponseErrorMessage } from 'api/utils';
+import useAlert from 'hooks/useAlert';
+import URLS from 'constants/urls';
+import { Link } from 'react-router-dom';
 
 const counterButtonStyles = {
     display: 'flex',
@@ -25,11 +27,14 @@ const counterButtonStyles = {
 interface PropI {
     data: ProductStateI;
     deleteItemCallback: (id: number) => void;
+    changeAmountCallback: (id: number, counter: number) => void;
 }
 
-const CartItem: React.FC<PropI> = ({ data, deleteItemCallback }) => {
+const CartItem: React.FC<PropI> = ({ data, deleteItemCallback, changeAmountCallback }) => {
     const [counter, setCounter] = useState<number>(data.counter || 1);
     const [isLoading, setIsLoading] = useState(false);
+    const { showErrorAlert } = useAlert();
+
     const deleteProductFromCart = useCallback(async (id: number) => {
         setIsLoading(true);
         await deleteFromCart(id)
@@ -37,25 +42,11 @@ const CartItem: React.FC<PropI> = ({ data, deleteItemCallback }) => {
                 if (res?.data?.status === API_RESPONSE_STATUS.OK) {
                     deleteItemCallback(id);
                 } else {
-                    Swal.fire({
-                        position: 'top',
-                        icon: 'error',
-                        title: res?.data?.message,
-                        showConfirmButton: false,
-                        timer: 1500,
-                        color: colors.sideNavBarBG,
-                    });
+                    showErrorAlert(getResponseErrorMessage(res));
                 }
             })
             .catch((e) => {
-                Swal.fire({
-                    position: 'top',
-                    icon: 'error',
-                    title: e?.response?.data?.message || strings.unknown_error,
-                    showConfirmButton: false,
-                    timer: 1500,
-                    color: colors.sideNavBarBG,
-                });
+                alert(getApiErrorMessage(e));
             })
             .finally(() => {
                 setIsLoading(false);
@@ -64,30 +55,17 @@ const CartItem: React.FC<PropI> = ({ data, deleteItemCallback }) => {
 
     const increment = useCallback(async () => {
         setIsLoading(true);
-        await incrementProduct(data?.id)
+        await incrementProductInCart(data?.id)
             .then((res) => {
                 if (res?.data?.status === API_RESPONSE_STATUS.OK) {
                     setCounter(res?.data?.data);
+                    changeAmountCallback(data?.id, res?.data?.data);
                 } else {
-                    Swal.fire({
-                        position: 'top',
-                        icon: 'error',
-                        title: res?.data?.message,
-                        showConfirmButton: false,
-                        timer: 1500,
-                        color: colors.sideNavBarBG,
-                    });
+                    showErrorAlert(getResponseErrorMessage(res));
                 }
             })
             .catch((e) => {
-                Swal.fire({
-                    position: 'top',
-                    icon: 'error',
-                    title: e?.response?.data?.message || strings.unknown_error,
-                    showConfirmButton: false,
-                    timer: 1500,
-                    color: colors.sideNavBarBG,
-                });
+                alert(getApiErrorMessage(e));
             })
             .finally(() => {
                 setIsLoading(false);
@@ -96,30 +74,17 @@ const CartItem: React.FC<PropI> = ({ data, deleteItemCallback }) => {
 
     const decrement = useCallback(async () => {
         setIsLoading(true);
-        await decrementProduct(data?.id)
+        await decrementProductInCart(data?.id)
             .then((res) => {
                 if (res?.data?.status === API_RESPONSE_STATUS.OK) {
                     setCounter(res?.data?.data);
+                    changeAmountCallback(data?.id, res?.data?.data);
                 } else {
-                    Swal.fire({
-                        position: 'top',
-                        icon: 'error',
-                        title: res?.data?.message,
-                        showConfirmButton: false,
-                        timer: 1500,
-                        color: colors.sideNavBarBG,
-                    });
+                    showErrorAlert(getResponseErrorMessage(res));
                 }
             })
             .catch((e) => {
-                Swal.fire({
-                    position: 'top',
-                    icon: 'error',
-                    title: e?.response?.data?.message || strings.unknown_error,
-                    showConfirmButton: false,
-                    timer: 1500,
-                    color: colors.sideNavBarBG,
-                });
+                showErrorAlert(getApiErrorMessage(e));
             })
             .finally(() => {
                 setIsLoading(false);
@@ -142,42 +107,64 @@ const CartItem: React.FC<PropI> = ({ data, deleteItemCallback }) => {
                 borderRadius: '15px',
                 overflow: 'hidden',
             }}>
-            <Box
-                sx={{
-                    width: '76px',
-                    height: '76px',
-                    borderRadius: '15px',
-                    overflow: 'hidden',
-                    float: 'left',
-                    backgroundImage: `url(${config.STATIC_PATH}${data?.img})`,
-                    noRepeat: 'center top',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                }}
-            />
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                    justifyContent: 'space-around',
-                }}>
-                <Box mb="8px" sx={{ fontSize: '14px', lineHeight: '160%' }}>
-                    {data?.title}
+            <Link to={URLS.PRODUCT_RAW + data?.id} style={{maxWidth:'70%'}}>
+                <Box>
+                    <Box
+                        sx={{
+                            width: '76px',
+                            height: '76px',
+                            borderRadius: '15px',
+                            overflow: 'hidden',
+                            float: 'left',
+                            backgroundImage: `url(${config.STATIC_PATH}${data?.img})`,
+                            noRepeat: 'center top',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            marginRight: '12px',
+                        }}
+                    />
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'flex-start',
+                            justifyContent: 'space-around',
+                            textOverflow: 'ellipsis',
+                            overflow: 'hidden',
+                            whiteSpace: 'nowrap',
+                        }}>
+                        <Box
+                            mb="8px"
+                            sx={{
+                                fontSize: '14px',
+                                lineHeight: '160%',
+                            }}>
+                            {data?.title?.slice(0, 35)}
+                        </Box>
+                        <Box
+                            mb="8px"
+                            sx={{
+                                fontSize: '12px',
+                                lineHeight: '145%',
+                            }}>
+                            {data?.description?.slice(0, 35)}
+                        </Box>
+                        <Box
+                            sx={{
+                                fontSize: '15px',
+                                lineHeight: '115%',
+                            }}>
+                            <b>{data?.sellingPrice + 'c'}</b>
+                        </Box>
+                    </Box>
                 </Box>
-                <Box mb="8px" sx={{ fontSize: '12px', lineHeight: '145%' }}>
-                    {data?.title}
-                </Box>
-                <Box sx={{ fontSize: '15px', lineHeight: '115%' }}>
-                    <b>{data?.sellingPrice + 'c'}</b>
-                </Box>
-            </Box>
+            </Link>
             <Box
                 sx={{
                     position: 'relative',
                     background: colors.costBG,
                     display: 'flex',
-                    width: '90px',
+                    minWidth: '90px',
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     borderRadius: '16px',
