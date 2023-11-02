@@ -22,9 +22,9 @@ export const getProductByIdWithAuth = (id: string) =>
 //CART
 export const getCart = () => privateAPI.get<BasicResponse<ProductStateI[]>>(ep.CART);
 export const addToCart = (productId: number) =>
-    privateAPI.post<BasicResponse<ProductStateI>>(ep.CART + productId);
+    privateAPI.post<BasicResponse<null>>(ep.CART + productId);
 export const deleteFromCart = (productId: number) =>
-    privateAPI.delete<BasicResponse<ProductStateI>>(ep.CART + productId);
+    privateAPI.delete<BasicResponse<null>>(ep.CART + productId);
 export const incrementProductInCart = (productId: number) =>
     privateAPI.patch<BasicResponse<number>>(ep.CART_INCREMENT + productId);
 export const decrementProductInCart = (productId: number) =>
@@ -32,8 +32,8 @@ export const decrementProductInCart = (productId: number) =>
 export const buyCartCart = () => privateAPI.post<BasicResponse<number>>(ep.CART_BUY);
 
 //FAVORITE
-export const getFavorite = () => privateAPI.get<BasicResponse<ProductStateI>>(ep.FAVORITE);
+export const getFavorite = () => privateAPI.get<BasicResponse<ProductStateI[]>>(ep.FAVORITE);
 export const addToFavorite = (productId: number) =>
-    privateAPI.post<BasicResponse<ProductStateI>>(ep.FAVORITE + productId);
+    privateAPI.post<BasicResponse<null>>(ep.FAVORITE + productId);
 export const deleteFromFavorite = (productId: number) =>
-    privateAPI.delete<BasicResponse<ProductStateI>>(ep.FAVORITE + productId);
+    privateAPI.delete<BasicResponse<null>>(ep.FAVORITE + productId);

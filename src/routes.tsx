@@ -6,6 +6,7 @@ import URLS from 'constants/urls';
 import AboutUser from 'components/aboutUser/AboutUser';
 import Content from 'components/content/Content';
 import { Container } from '@mui/material';
+import Favorite from 'components/favorites/Favorites';
 
 const routes = [
     {
@@ -30,7 +31,7 @@ const routes = [
             },
             {
                 path: 'favorite',
-                element: <h3>{'favorite'}</h3>,
+                element: <Favorite />,
                 errorElement: <h1>ERROR_LECEL_2</h1>,
             },
             {

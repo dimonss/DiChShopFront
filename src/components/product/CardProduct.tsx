@@ -146,7 +146,13 @@ const CardProduct: React.FC<PropI> = ({
                 </Box>
                 <Box
                     onClick={
-                        loggedIn ? (localInCart ? deleteProductFromCart : addProductToCart) : loginAlert
+                        isLoading
+                            ? () => {}
+                            : loggedIn
+                            ? localInCart
+                                ? deleteProductFromCart
+                                : addProductToCart
+                            : loginAlert
                     }
                     sx={{
                         flexGrow: '1',

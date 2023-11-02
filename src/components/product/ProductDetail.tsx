@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { getProductById } from 'api/contentAPI';
 import { API_RESPONSE_STATUS } from 'api/statuses';
@@ -11,7 +11,6 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import GoBackButton from 'components/reusable/buttons/GoBackButton';
 import strings from 'constants/strings';
-import Swal from 'sweetalert2';
 import LocalLoader, { LOCAL_LOADER_SIZES } from 'components/reusable/loaders/LocalLoader';
 import useLoginAlert from 'hooks/useLoginAlert';
 import useCartOperations from 'hooks/cart/useCartOperations';
@@ -20,10 +19,10 @@ import { getProductByIdWithAuth } from 'api/privateAPI';
 import { PRODUCT_DEFAULT_VALUES } from 'constants/globalConstants';
 import useAuth from 'hooks/useAuth';
 import useGlobalErrorSnackbar from 'hooks/useGlobalErrorSnackbar';
+import useFavoriteOperations from 'hooks/favorite/useFavoriteOperations';
 
 const ProductDetail = () => {
     const { loggedIn } = useAppSelector((state) => state?.user);
-    const [isFavorite, setIsFavorite] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
     const [data, setData] = useState<ProductStateI>(PRODUCT_DEFAULT_VALUES);
@@ -34,22 +33,13 @@ const ProductDetail = () => {
     useAuth();
     useGlobalErrorSnackbar();
     /////////////////////////////////////////////////
+    const {
+        addProductToFavorites,
+        deleteProductFromFavorites,
+        favoritesOperationsIsLoading,
+        localInFavorites,
+    } = useFavoriteOperations(data);
 
-    const changeFavoriteStatus = useCallback(() => {
-        setIsFavorite((prev) => {
-            Swal.fire({
-                position: 'top',
-                icon: 'success',
-                title: isFavorite
-                    ? strings.item_successfully_deleted_to_favorite
-                    : strings.item_successfully_added_to_favorite,
-                showConfirmButton: false,
-                timer: 1500,
-                color: 'white',
-            });
-            return !prev;
-        });
-    }, [isFavorite]);
     useEffect(() => {
         if (params?.id?.length) {
             setIsLoading(true);
@@ -127,53 +117,87 @@ const ProductDetail = () => {
                         marginBottom: '12px',
                     }}>
                     <Box sx={{ fontSize: 24 }}>{data?.title}</Box>
-
-                    <Box onClick={changeFavoriteStatus}>
-                        {isFavorite ? (
-                            <FavoriteIcon
-                                sx={{
-                                    color: colors.red,
-                                    width: 32,
-                                    height: 32,
-                                }}
-                            />
-                        ) : (
-                            <FavoriteBorderIcon
-                                sx={{
-                                    width: 32,
-                                    height: 32,
-                                }}
-                            />
-                        )}
-                    </Box>
+                    {!isLoading && (
+                        <Box
+                            onClick={
+                                favoritesOperationsIsLoading
+                                    ? () => {}
+                                    : localInFavorites
+                                    ? deleteProductFromFavorites
+                                    : addProductToFavorites
+                            }>
+                            {favoritesOperationsIsLoading ? (
+                                <Box
+                                    sx={{
+                                        position: 'relative',
+                                        width: '32px',
+                                        height: '35px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                    }}>
+                                    <Box
+                                        sx={{
+                                            position: 'absolute',
+                                            width: '32px',
+                                            height: '32px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            top: 0,
+                                            left: '-5px',
+                                        }}>
+                                        <LocalLoader size={LOCAL_LOADER_SIZES.XS} color={colors.red} />
+                                    </Box>
+                                </Box>
+                            ) : localInFavorites ? (
+                                <FavoriteIcon
+                                    sx={{
+                                        color: colors.red,
+                                        width: 32,
+                                        height: 32,
+                                    }}
+                                />
+                            ) : (
+                                <FavoriteBorderIcon
+                                    sx={{
+                                        width: 32,
+                                        height: 32,
+                                    }}
+                                />
+                            )}
+                        </Box>
+                    )}
                 </Box>
-                <Box sx={{ display: 'flex', fontSize: '16px', marginBottom: '12px' }}>
-                    <Box>{data?.subtitle}</Box>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            fontSize: '10px',
-                            marginLeft: '16px',
-                        }}>
+                {!isLoading && (
+                    <Box sx={{ display: 'flex', fontSize: '16px', marginBottom: '12px' }}>
+                        <Box>{data?.subtitle}</Box>
                         <Box
                             sx={{
                                 display: 'flex',
-                                justifyItems: 'center',
-                                alignItems: 'center',
+                                fontSize: '10px',
+                                marginLeft: '16px',
                             }}>
-                            <StarIcon fontSize="small" sx={{ width: '14px', color: colors.yellow }} />
-                        </Box>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                justifyItems: 'center',
-                                alignItems: 'center',
-                                marginLeft: '4px',
-                            }}>
-                            {data?.rating}
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    justifyItems: 'center',
+                                    alignItems: 'center',
+                                }}>
+                                <StarIcon fontSize="small" sx={{ width: '14px', color: colors.yellow }} />
+                            </Box>
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    justifyItems: 'center',
+                                    alignItems: 'center',
+                                    marginLeft: '4px',
+                                }}>
+                                {data?.rating}
+                            </Box>
                         </Box>
                     </Box>
-                </Box>
+                )}
                 <Box>{data?.description}</Box>
             </Box>
 
@@ -192,7 +216,13 @@ const ProductDetail = () => {
                 </Box>
                 <Box
                     onClick={
-                        loggedIn ? (localInCart ? deleteProductFromCart : addProductToCart) : loginAlert
+                        loggedIn
+                            ? cartOperationsIsLoading
+                                ? () => {}
+                                : localInCart
+                                ? deleteProductFromCart
+                                : addProductToCart
+                            : loginAlert
                     }
                     sx={{
                         display: 'flex',
@@ -207,7 +237,7 @@ const ProductDetail = () => {
                         height: '45px',
                     }}>
                     {isLoading || cartOperationsIsLoading ? (
-                        <LocalLoader size={LOCAL_LOADER_SIZES.XS} />
+                        <LocalLoader size={LOCAL_LOADER_SIZES.XS} color={colors.primary} />
                     ) : (
                         <b>{localInCart ? strings.delete_from_cart : strings.add_to_cart}</b>
                     )}
