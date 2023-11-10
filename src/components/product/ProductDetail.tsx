@@ -24,7 +24,7 @@ import useFavoriteOperations from 'hooks/favorite/useFavoriteOperations';
 const ProductDetail = () => {
     const { loggedIn } = useAppSelector((state) => state?.user);
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(false);
+    const [_, setError] = useState(false);
     const [data, setData] = useState<ProductStateI>(PRODUCT_DEFAULT_VALUES);
     const params = useParams();
 
@@ -120,11 +120,13 @@ const ProductDetail = () => {
                     {!isLoading && (
                         <Box
                             onClick={
-                                favoritesOperationsIsLoading
-                                    ? () => {}
-                                    : localInFavorites
-                                    ? deleteProductFromFavorites
-                                    : addProductToFavorites
+                                loggedIn
+                                    ? favoritesOperationsIsLoading
+                                        ? () => {}
+                                        : localInFavorites
+                                        ? deleteProductFromFavorites
+                                        : addProductToFavorites
+                                    : loginAlert
                             }>
                             {favoritesOperationsIsLoading ? (
                                 <Box

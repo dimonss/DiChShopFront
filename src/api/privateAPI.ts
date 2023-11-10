@@ -3,6 +3,7 @@ import axios, { AxiosInstance } from 'axios';
 import * as ep from './endpoints';
 import { BasicResponse } from './types/dto';
 import { ProductStateI } from 'redux/types/productTypes';
+import { productSearchParamsI } from 'types/apiTypes';
 
 const baseURL = config.API_URL;
 
@@ -14,15 +15,14 @@ export const privateAPI: AxiosInstance = axios.create({
 });
 export const findProductWithAuth = (searchText: string) =>
     privateAPI.get<BasicResponse<ProductStateI[]>>(ep.PRODUCT_SEARCH_WITH_AUTH + searchText);
-export const getProductWithAuth = () =>
-    privateAPI.get<BasicResponse<ProductStateI>>(ep.PRODUCT_WITH_AUTH);
+export const getProductWithAuth = (params: productSearchParamsI) =>
+    privateAPI.get<BasicResponse<ProductStateI>>(ep.PRODUCT_WITH_AUTH, { params });
 export const getProductByIdWithAuth = (id: string) =>
     privateAPI.get<BasicResponse<ProductStateI>>(ep.PRODUCT_WITH_AUTH + id);
 
 //CART
 export const getCart = () => privateAPI.get<BasicResponse<ProductStateI[]>>(ep.CART);
-export const addToCart = (productId: number) =>
-    privateAPI.post<BasicResponse<null>>(ep.CART + productId);
+export const addToCart = (productId: number) => privateAPI.post<BasicResponse<null>>(ep.CART + productId);
 export const deleteFromCart = (productId: number) =>
     privateAPI.delete<BasicResponse<null>>(ep.CART + productId);
 export const incrementProductInCart = (productId: number) =>

@@ -18,3 +18,7 @@
     height: 40vmin;
     pointer-events: none;
 }
+
+::-webkit-scrollbar {
+    display: none;
+}

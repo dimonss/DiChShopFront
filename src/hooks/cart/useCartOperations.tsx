@@ -10,7 +10,7 @@ interface TypeI {
     inCart?: boolean;
 }
 
-const useCartOperations = ({ id = -1, inCart = true }: TypeI) => {
+const useCartOperations = ({ id = -1, inCart = false }: TypeI) => {
     const [cartOperationsIsLoading, setCartOperationsIsLoading] = useState<boolean>(false);
     const [localInCart, setLocalInCart] = useState<boolean>(inCart || false);
     useEffect(() => {

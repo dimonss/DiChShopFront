@@ -14,6 +14,7 @@ import URLS from 'constants/urls';
 import CartItem from 'components/cart/CartItem';
 import { useNavigate } from 'react-router-dom';
 import useAlert from 'hooks/useAlert';
+import LoginButton from 'components/reusable/buttons/LoginButton';
 
 const Cart = () => {
     const { loggedIn, discount } = useAppSelector((state) => state.user);
@@ -124,7 +125,14 @@ const Cart = () => {
                             ))}
                         </TransitionGroup>
                     ) : (
-                        <h3>У вас еще нет товаров в корзине</h3>
+                        <>
+                            <h3>
+                                {loggedIn
+                                    ? 'У вас еще нет товаров в корзине'
+                                    : 'Для использования корзины необходимо авторизоваться'}
+                            </h3>
+                            {!loggedIn && <LoginButton />}
+                        </>
                     )}
                 </Box>
 

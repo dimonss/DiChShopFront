@@ -1,10 +1,10 @@
 import { ActionReducerMapBuilder, AsyncThunk, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { API_RESPONSE_STATUS } from 'api/statuses';
 import { getApiErrorMessage, getResponseErrorMessage } from 'api/utils';
-import { findProduct, getCategory, getProduct } from 'api/contentAPI';
+import { getCategory, getProduct } from 'api/contentAPI';
 import { ContentAsyncActions, ContentStateI } from 'redux/types/contentTypes';
 import { NullableString } from 'types/globalTypes';
-import { findProductWithAuth, getProductWithAuth } from 'api/privateAPI';
+import { getProductWithAuth } from 'api/privateAPI';
 
 const initialState: ContentStateI = {
     product: [],
@@ -26,18 +26,22 @@ export const trackActionState = (
 export const fetchProduct = createAsyncThunk(
     'content/fetchProduct',
     async (
-        { searchText = null, loggedIn }: { searchText: NullableString | undefined; loggedIn: boolean },
+        {
+            search = null,
+            categoryId,
+            loggedIn,
+        }: {
+            search?: NullableString;
+            categoryId?: NullableString;
+            loggedIn: boolean;
+        },
         { rejectWithValue },
     ) => {
+        categoryId = categoryId === '-1' ? '' : categoryId;
         try {
-            const res =
-                searchText === null || searchText === ''
-                    ? loggedIn
-                        ? await getProductWithAuth()
-                        : await getProduct()
-                    : loggedIn
-                    ? await findProductWithAuth(searchText)
-                    : await findProduct(searchText);
+            const res = loggedIn
+                ? await getProductWithAuth({ search, categoryId })
+                : await getProduct({ search, categoryId });
             if (res?.data?.status === API_RESPONSE_STATUS.OK) {
                 return res?.data?.data;
             } else if (res?.data?.status === API_RESPONSE_STATUS.NOT_FOUND) {

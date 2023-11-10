@@ -16,6 +16,7 @@ const strings = {
     open_bot: 'Открыть бота',
     you_are_success_authorized: 'Вы успешно авторизовались',
     place_order: 'Оформить заказ',
+    login: 'Войти',
 };
 
 export default strings;

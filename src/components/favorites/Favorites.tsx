@@ -11,6 +11,7 @@ import { TransitionGroup } from 'react-transition-group';
 import Collapse from '@mui/material/Collapse';
 import FavoriteItem from 'components/favorites/FavoriteItem';
 import useAlert from 'hooks/useAlert';
+import LoginButton from 'components/reusable/buttons/LoginButton';
 
 const Favorite = () => {
     const { loggedIn } = useAppSelector((state) => state.user);
@@ -84,7 +85,14 @@ const Favorite = () => {
                         ))}
                     </TransitionGroup>
                 ) : (
-                    <h3>У вас еще нет товаров в избранном</h3>
+                    <>
+                        <h3>
+                            {loggedIn
+                                ? 'У вас еще нет товаров в избранном'
+                                : 'Для использования избранного товара необходимо авторизоваться'}
+                        </h3>
+                        {!loggedIn && <LoginButton />}
+                    </>
                 )}
             </Box>
         </Box>

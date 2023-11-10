@@ -3,7 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import brewImage from 'images/Brew.png';
 import { useAppSelector } from 'types/globalTypes';
-import config from 'config';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 import useAuthAlert from 'hooks/useLoginAlert';
@@ -47,9 +46,20 @@ const AboutUser = () => {
                         sx={{
                             height: '50px',
                             width: '50px',
-                        }}
-                        src={loggedIn ? config.STATIC_PATH + photo : defaultUserPhoto}
-                    />
+                        }}>
+                        <img
+                            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.src = defaultUserPhoto;
+                            }}
+                            src={loggedIn ? photo : defaultUserPhoto}
+                            style={{
+                                height: '50px',
+                                width: '50px',
+                            }}
+                            alt={'user avatar'}
+                        />
+                    </Avatar>
                 </Box>
             </Box>
         </Box>

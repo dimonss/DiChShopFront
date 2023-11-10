@@ -46,9 +46,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 const SearchInput = () => {
     const [params, setSearchParams] = useSearchParams();
-    const searchHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        setSearchParams({ search: e.target.value });
-    }, []);
+    const searchHandler = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => {
+            const category = params.get('category') || '';
+            setSearchParams({ category, search: e.target.value });
+        },
+        [params],
+    );
     return (
         <Search>
             <SearchIconWrapper>

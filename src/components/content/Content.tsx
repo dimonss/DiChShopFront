@@ -20,8 +20,10 @@ const Content = () => {
     const [params] = useSearchParams();
 
     useEffect(() => {
-        dispatch(fetchProduct({ searchText: params.get('search'), loggedIn }));
-    }, [params.get('search'), loggedIn]);
+        dispatch(
+            fetchProduct({ search: params.get('search'), categoryId: params.get('category'), loggedIn }),
+        );
+    }, [params, loggedIn]);
 
     return (
         <>
