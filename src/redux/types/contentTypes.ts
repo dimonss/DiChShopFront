@@ -1,4 +1,5 @@
 import { ProductStateI } from 'redux/types/productTypes';
+import {NotificationI} from "api/types/notification";
 
 export interface CategoryStateI {
     id: number;
@@ -8,10 +9,11 @@ export interface CategoryStateI {
 export interface ContentStateI {
     readonly product: ProductStateI[];
     readonly category: CategoryStateI[];
+    readonly notification: NotificationI[];
 }
 
-type AMLKeys = 'product' | 'category';
+type ContentKeys = 'product' | 'category' | 'notification';
 
 export type ContentAsyncActions = {
-    [K in AMLKeys]: any;
+    [K in ContentKeys]: any;
 };

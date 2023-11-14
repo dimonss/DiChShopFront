@@ -74,7 +74,7 @@ const ProductDetail = () => {
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 color: colors.white,
-                minHeight: 'calc(100vh - 28px)',
+                minHeight: 'calc(100svh - 28px)',
             }}>
             <GoBackButton />
             <Box>

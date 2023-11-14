@@ -4,6 +4,7 @@ import * as ep from './endpoints';
 import { BasicResponse } from './types/dto';
 import { ProductStateI } from 'redux/types/productTypes';
 import { productSearchParamsI } from 'types/apiTypes';
+import { NotificationI } from 'api/types/notification';
 
 const baseURL = config.API_URL;
 
@@ -13,8 +14,6 @@ export const privateAPI: AxiosInstance = axios.create({
         'content-type': 'application/json',
     },
 });
-export const findProductWithAuth = (searchText: string) =>
-    privateAPI.get<BasicResponse<ProductStateI[]>>(ep.PRODUCT_SEARCH_WITH_AUTH + searchText);
 export const getProductWithAuth = (params: productSearchParamsI) =>
     privateAPI.get<BasicResponse<ProductStateI>>(ep.PRODUCT_WITH_AUTH, { params });
 export const getProductByIdWithAuth = (id: string) =>
@@ -37,3 +36,8 @@ export const addToFavorite = (productId: number) =>
     privateAPI.post<BasicResponse<null>>(ep.FAVORITE + productId);
 export const deleteFromFavorite = (productId: number) =>
     privateAPI.delete<BasicResponse<null>>(ep.FAVORITE + productId);
+
+//NOTIFICATION
+export const getNotifications = () => privateAPI.get<BasicResponse<NotificationI[]>>(ep.NOTIFICATION);
+export const getStatusOfNewNotifications = () =>
+    privateAPI.get<BasicResponse<boolean>>(ep.HAVE_NEW_NOTIFICATIONS);

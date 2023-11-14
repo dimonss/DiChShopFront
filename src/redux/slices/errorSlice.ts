@@ -2,18 +2,20 @@ import { ActionReducerMapBuilder, AsyncThunk, createSlice } from '@reduxjs/toolk
 import { PayloadAction } from '@reduxjs/toolkit/dist/createAction';
 import { AsyncAction, ErrorState } from '../types/errorTypes';
 import { loginUser } from './userSlice';
-import { fetchCategory, fetchProduct } from 'redux/slices/contentSlice';
+import { fetchCategory, fetchNotification, fetchProduct } from 'redux/slices/contentSlice';
 
 const initialState: ErrorState = {
     user: '',
     product: '',
     category: '',
+    notification: '',
 };
 
 export const asyncActions: AsyncAction = {
     user: loginUser,
     product: fetchProduct,
     category: fetchCategory,
+    notification: fetchNotification,
 };
 
 export const trackActionState = (

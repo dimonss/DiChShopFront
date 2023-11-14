@@ -1,6 +1,7 @@
 .App {
     text-align: center;
     background-color: #201520;
+    /*min-height: 100svh;*/
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -9,8 +10,7 @@
     color: white;
     font-family: "serif";
     position: relative;
-    max-width: 100%;
-    width: 425px;
+    width: 430px;
     overflow: hidden;
 }
 

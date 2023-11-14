@@ -17,6 +17,8 @@ const strings = {
     you_are_success_authorized: 'Вы успешно авторизовались',
     place_order: 'Оформить заказ',
     login: 'Войти',
+    ups: 'Упс. Что то пошло не так',
+    notifications_is_empty: 'Уведомления отсутствуют',
 };
 
 export default strings;

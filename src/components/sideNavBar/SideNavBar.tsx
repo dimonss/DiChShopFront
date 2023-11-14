@@ -16,7 +16,7 @@ const SideNavBar = () => {
     useWindowSize();
     const categories = useAppSelector((state) => state?.content?.category);
     const categoriesWithDefaultValue = useMemo(
-        () => [{ id: -1, name: 'all' }, ...categories],
+        () => [{ id: -1, name: 'Все Категории' }, ...categories],
         [categories],
     );
     const [params, setSearchParams] = useSearchParams();
@@ -31,7 +31,7 @@ const SideNavBar = () => {
                 background: colors.sideNavBarBG,
                 position: 'fixed',
                 bottom: '78px',
-                left: `${window.innerWidth <= 425 ? 0 : window.innerWidth / 2 - 212}px`,
+                left: `${window.innerWidth <= 430 ? 0 : window.innerWidth / 2 - 212}px`,
                 width: '32px',
                 borderTopRightRadius: '60px',
                 fontSize: '14px',
@@ -39,9 +39,9 @@ const SideNavBar = () => {
             <Box
                 sx={{
                     overflowY: 'scroll',
-                    marginTop: '30px',
+                    marginTop: '10px',
                 }}>
-                {categoriesWithDefaultValue.map((item) => (
+                {categoriesWithDefaultValue?.map((item) => (
                     <Box
                         key={item.id}
                         sx={{
@@ -50,13 +50,11 @@ const SideNavBar = () => {
                                     ? colors.iconActiveColor
                                     : colors.iconDefaultColor,
                             ...transitions.color,
-                            writingMode: 'vertical-rl',
-                            rotate: '180deg',
-                            display: 'flex',
-                            justifyContent: 'space-around',
                             cursor: 'pointer',
-                            outline: 'none',
-                            marginBottom: '22px',
+                            transform: 'rotate(-90deg)',
+                            marginTop: `calc(6px * ${item?.name?.length})`,
+                            marginBottom: `calc(6px * ${item?.name?.length})`,
+                            whiteSpace: 'nowrap',
                         }}
                         onClick={() => {
                             const search = params.get('search') || '';

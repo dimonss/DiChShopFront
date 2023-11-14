@@ -97,7 +97,7 @@ const Cart = () => {
             }}>
             <Box p={'16px'}>
                 <h3 style={{ fontWeight: 400, margin: '14px 0' }}>Крозина</h3>
-                <Box sx={{ height: 'calc(100vh - 380px)', overflowY: 'scroll', borderRadius: '15px' }}>
+                <Box sx={{ height: 'calc(100svh - 380px)', overflowY: 'scroll', borderRadius: '15px' }}>
                     {isLoading ? (
                         <Box
                             sx={{

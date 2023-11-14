@@ -1,7 +1,7 @@
 import { ActionReducerMapBuilder, AsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { LoadingKeys, LoadingState } from '../types/loadingTypes';
 import { loginUser } from './userSlice';
-import { fetchCategory, fetchProduct } from 'redux/slices/contentSlice';
+import { fetchCategory, fetchNotification, fetchProduct } from 'redux/slices/contentSlice';
 
 type AsyncAction = {
     [K in LoadingKeys]: any;
@@ -11,11 +11,13 @@ const initialState: LoadingState = {
     user: false,
     product: false,
     category: false,
+    notification: false,
 };
 export const asyncActions: AsyncAction = {
     user: loginUser,
     product: fetchProduct,
     category: fetchCategory,
+    notification: fetchNotification,
 };
 
 export const trackActionState = (

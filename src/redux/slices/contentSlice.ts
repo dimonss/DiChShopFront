@@ -4,11 +4,12 @@ import { getApiErrorMessage, getResponseErrorMessage } from 'api/utils';
 import { getCategory, getProduct } from 'api/contentAPI';
 import { ContentAsyncActions, ContentStateI } from 'redux/types/contentTypes';
 import { NullableString } from 'types/globalTypes';
-import { getProductWithAuth } from 'api/privateAPI';
+import { getNotifications, getProductWithAuth } from 'api/privateAPI';
 
 const initialState: ContentStateI = {
     product: [],
     category: [],
+    notification: [],
 };
 
 export const trackActionState = (
@@ -68,11 +69,27 @@ export const fetchCategory = createAsyncThunk('content/fetchCategory', async (_,
     }
 });
 
+export const fetchNotification = createAsyncThunk(
+    'content/fetchNotification',
+    async (_, { rejectWithValue }) => {
+        try {
+            const res = await getNotifications();
+            if (res?.data?.status === API_RESPONSE_STATUS?.OK) {
+                return res?.data?.data;
+            } else {
+                return rejectWithValue(getCategory());
+            }
+        } catch (e) {
+            return rejectWithValue('unknown error');
+        }
+    },
+);
 /////////////////////
 
 export const contentAsyncActions: ContentAsyncActions = {
     product: fetchProduct,
     category: fetchCategory,
+    notification: fetchNotification ,
 };
 
 export const contentSlice = createSlice({
