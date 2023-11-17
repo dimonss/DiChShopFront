@@ -6,16 +6,27 @@ export enum BuildType {
 
 export interface Config {
     stateVersion: number;
-    BUILD_TYPE: BuildType;
     isProduction: () => boolean;
     isDev: () => boolean;
+    BUILD_TYPE: BuildType;
     API_URL: string;
     STATIC_PATH: string;
     BOT_NAME: string;
 }
 
-interface OverridableConfig extends Partial<Config> {}
+export interface DefaultConfig {
+    stateVersion: number;
+    isProduction: () => boolean;
+    isDev: () => boolean;
+}
+
+interface EnvConfig {
+    BUILD_TYPE: BuildType;
+    API_URL: string;
+    STATIC_PATH: string;
+    BOT_NAME: string;
+}
 
 export type BuildTypesScheme = {
-    [key in BuildType]?: OverridableConfig;
+    [key in BuildType]: EnvConfig;
 };

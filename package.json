@@ -37,8 +37,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start dev": "BUILD_TYPE=development react-scripts start",
-    "build": "react-scripts build",
+    "start:dev": "REACT_APP_BUILD_TYPE=development  react-scripts start",
+    "start:stage": "REACT_APP_BUILD_TYPE=stage react-scripts start",
+    "start:prod": "REACT_APP_BUILD_TYPE=production react-scripts start",
+    "build": "GENERATE_SOURCEMAP=false BUILD_TYPE=production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,json}'"

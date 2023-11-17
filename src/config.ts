@@ -1,27 +1,32 @@
-import { BuildType, BuildTypesScheme, Config } from 'types/configTypes';
+import { BuildType, BuildTypesScheme, Config, DefaultConfig } from 'types/configTypes';
 
-const defaultConfig: Config = {
+const defaultConfig: DefaultConfig = {
     stateVersion: 1.0,
-    BUILD_TYPE: BuildType.PRODUCTION,
-    isProduction: () => process.env.BUILD_TYPE === BuildType.PRODUCTION,
-    isDev: () => process.env.BUILD_TYPE === BuildType.DEVELOPMENT,
-    API_URL: 'http://172.20.10.7:4000/',
-    STATIC_PATH: 'http://172.20.10.7/static/',
-    BOT_NAME: 'DiChAdminBot'
+    isProduction: () => process.env.REACT_APP_BUILD_TYPE === BuildType.PRODUCTION,
+    isDev: () => process.env.REACT_APP_BUILD_TYPE === BuildType.DEVELOPMENT,
 };
 
 const buildTypeConfigs: BuildTypesScheme = {
     development: {
         BUILD_TYPE: BuildType.DEVELOPMENT,
-        API_URL: 'http://172.20.10.7:4000/',
-        STATIC_PATH: 'http://172.20.10.7/static/',
-        BOT_NAME: 'DiChAdminBot'
+        API_URL: 'http://127.0.0.1:4000/',
+        STATIC_PATH: 'http://127.0.0.1/api/static/',
+        BOT_NAME: 'DiChAdminBot',
     },
     stage: {
-
+        BUILD_TYPE: BuildType.STAGE,
+        API_URL: 'http://207.154.247.249/api/',
+        STATIC_PATH: 'http://207.154.247.249/api/static/',
+        BOT_NAME: 'DiChShop_bot',
+    },
+    production: {
+        BUILD_TYPE: BuildType.PRODUCTION,
+        API_URL: 'http://207.154.247.249:4000/',
+        STATIC_PATH: 'http://207.154.247.249/api/static/',
+        BOT_NAME: 'DiChShop_bot',
     },
 };
 
-const buildType: BuildType = process.env['BUILD_TYPE'] as BuildType;
+const buildType: BuildType = process.env['REACT_APP_BUILD_TYPE'] as BuildType;
 const config: Config = { ...defaultConfig, ...buildTypeConfigs[buildType] };
 export default config;
