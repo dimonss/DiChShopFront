@@ -15,13 +15,13 @@ const buildTypeConfigs: BuildTypesScheme = {
     },
     stage: {
         BUILD_TYPE: BuildType.STAGE,
-        API_URL: 'http://207.154.247.249/api/',
+        API_URL: 'https://dich.tech/api',
         STATIC_PATH: 'http://207.154.247.249/api/static/',
         BOT_NAME: 'DiChShop_bot',
     },
     production: {
         BUILD_TYPE: BuildType.PRODUCTION,
-        API_URL: 'http://207.154.247.249:4000/',
+        API_URL: 'https://dich.tech/api',
         STATIC_PATH: 'http://207.154.247.249/api/static/',
         BOT_NAME: 'DiChShop_bot',
     },
