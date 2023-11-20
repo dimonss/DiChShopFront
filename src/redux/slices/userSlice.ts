@@ -6,6 +6,7 @@ import { API_RESPONSE_STATUS } from 'api/statuses';
 import { getApiErrorMessage, getResponseErrorMessage } from 'api/utils';
 
 const initialState: UserStateI = {
+    id: -1,
     firstname: '',
     lastname: '',
     login: '',
@@ -24,7 +25,7 @@ export const loginUser = createAsyncThunk(
     ) => {
         try {
             const response = await getClient(token);
-            if (response.data.status === API_RESPONSE_STATUS.OK) {
+            if (response?.data?.status === API_RESPONSE_STATUS.OK) {
                 successCallback();
                 return response.data.data;
             } else {

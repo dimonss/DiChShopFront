@@ -12,6 +12,8 @@ import Collapse from '@mui/material/Collapse';
 import FavoriteItem from 'components/favorites/FavoriteItem';
 import useAlert from 'hooks/useAlert';
 import LoginButton from 'components/reusable/buttons/LoginButton';
+import { AmplitudeEvents, logEvent } from 'utils/logger';
+import strings from 'constants/strings'
 
 const Favorite = () => {
     const { loggedIn } = useAppSelector((state) => state.user);
@@ -33,8 +35,9 @@ const Favorite = () => {
             setIsLoading(true);
             getFavorite()
                 .then((res) => {
-                    if (res.data.status === API_RESPONSE_STATUS.OK) {
+                    if (res?.data?.status === API_RESPONSE_STATUS.OK) {
                         setFavoritesList(res.data.data);
+                        logEvent(AmplitudeEvents.FAVORITE_PAGE);
                     } else {
                         setError(getResponseErrorMessage(res));
                     }
@@ -61,7 +64,7 @@ const Favorite = () => {
                 marginBottom: '70px',
             }}>
             <Box p={'16px'}>
-                <h3 style={{ fontWeight: 400, margin: '14px 0' }}>Избранные</h3>
+                <h3 style={{ fontWeight: 400, margin: '14px 0' }}>{strings.favorite}</h3>
                 {isLoading ? (
                     <Box
                         sx={{

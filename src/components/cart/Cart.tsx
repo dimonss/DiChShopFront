@@ -15,9 +15,10 @@ import CartItem from 'components/cart/CartItem';
 import { useNavigate } from 'react-router-dom';
 import useAlert from 'hooks/useAlert';
 import LoginButton from 'components/reusable/buttons/LoginButton';
+import { AmplitudeEvents, logEvent } from 'utils/logger';
 
 const Cart = () => {
-    const { loggedIn, discount } = useAppSelector((state) => state.user);
+    const { loggedIn, discount, id: userId } = useAppSelector((state) => state.user);
     const [cart, setCart] = useState<ProductStateI[]>([]);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -46,7 +47,7 @@ const Cart = () => {
             setIsLoading(true);
             getCart()
                 .then((res) => {
-                    if (res.data.status === API_RESPONSE_STATUS.OK) {
+                    if (res?.data?.status === API_RESPONSE_STATUS.OK) {
                         setCart(res.data.data);
                     } else {
                         setError(getResponseErrorMessage(res));
@@ -59,6 +60,7 @@ const Cart = () => {
                     setIsLoading(false);
                 });
         }
+        logEvent(AmplitudeEvents.CART_PAGE);
     }, []);
     const deleteCallbackItem = useCallback((id: number) => {
         setCart((prev) => prev.filter((item) => item?.id !== id));
@@ -74,6 +76,14 @@ const Cart = () => {
                 .then((res) => {
                     if (res?.data?.status === API_RESPONSE_STATUS.OK) {
                         showSuccessAlert(res?.data?.message, 5000);
+                        logEvent(AmplitudeEvents.BUY_CART, {
+                            cart: cart?.map((item) => ({
+                                productId: item?.id,
+                                counter: item?.counter,
+                                title: item?.title,
+                            })),
+                            userId,
+                        });
                         navigate(URLS.HOME);
                     } else {
                         setError(getResponseErrorMessage(res));
@@ -96,7 +106,7 @@ const Cart = () => {
                 width: '100%',
             }}>
             <Box p={'16px'}>
-                <h3 style={{ fontWeight: 400, margin: '14px 0' }}>Крозина</h3>
+                <h3 style={{ fontWeight: 400, margin: '14px 0' }}>{strings.cart}</h3>
                 <Box sx={{ height: 'calc(100svh - 380px)', overflowY: 'scroll', borderRadius: '15px' }}>
                     {isLoading ? (
                         <Box

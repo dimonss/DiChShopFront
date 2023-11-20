@@ -4,6 +4,7 @@ import { API_RESPONSE_STATUS } from 'api/statuses';
 import Swal from 'sweetalert2';
 import colors from 'layout/colors';
 import strings from 'constants/strings';
+import { AmplitudeEvents, logEvent } from 'utils/logger';
 
 interface TypeI {
     id: number;
@@ -24,6 +25,7 @@ const useFavoriteOperations = ({ id, favorite = false, deletedItemCallback = () 
             .then((res) => {
                 if (res?.data?.status === API_RESPONSE_STATUS.OK) {
                     setLocalInFavorites(true);
+                    logEvent(AmplitudeEvents.ADD_TO_FAVORITE, { id });
                 } else {
                     Swal.fire({
                         position: 'top',
@@ -57,6 +59,7 @@ const useFavoriteOperations = ({ id, favorite = false, deletedItemCallback = () 
                 if (res?.data?.status === API_RESPONSE_STATUS.OK) {
                     setLocalInFavorites(false);
                     deletedItemCallback(id);
+                    logEvent(AmplitudeEvents.DELETE_FROM_FAVORITE, { id });
                 } else {
                     Swal.fire({
                         position: 'top',

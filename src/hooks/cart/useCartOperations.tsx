@@ -4,6 +4,7 @@ import { API_RESPONSE_STATUS } from 'api/statuses';
 import Swal from 'sweetalert2';
 import colors from 'layout/colors';
 import strings from 'constants/strings';
+import {AmplitudeEvents, logEvent} from "utils/logger";
 
 interface TypeI {
     id: number;
@@ -23,6 +24,7 @@ const useCartOperations = ({ id = -1, inCart = false }: TypeI) => {
             .then((res) => {
                 if (res?.data?.status === API_RESPONSE_STATUS.OK) {
                     setLocalInCart(true);
+                    logEvent(AmplitudeEvents.ADD_TO_CART, { id });
                     // Swal.fire({
                     //     position: 'top',
                     //     icon: 'success',
@@ -63,6 +65,7 @@ const useCartOperations = ({ id = -1, inCart = false }: TypeI) => {
             .then((res) => {
                 if (res?.data?.status === API_RESPONSE_STATUS.OK) {
                     setLocalInCart(false);
+                    logEvent(AmplitudeEvents.DELETE_FROM_CART, { id });
                     // Swal.fire({
                     //     position: 'top',
                     //     icon: 'success',

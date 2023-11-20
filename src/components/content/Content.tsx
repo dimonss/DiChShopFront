@@ -9,15 +9,19 @@ import { useSearchParams } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import colors from 'layout/colors';
 import strings from 'constants/strings';
+import { AmplitudeEvents, logEvent, setUserId } from 'utils/logger';
 
 const Content = () => {
     const dispatch = useAppDispatch();
-    const [product, isLoading, loggedIn] = useAppSelector((store) => [
-        store?.content?.product,
-        store?.loading?.product,
-        store?.user?.loggedIn,
-    ]);
+    const product = useAppSelector((store) => store?.content?.product);
+    const isLoading = useAppSelector((store) => store?.loading?.product);
+    const loggedIn = useAppSelector((store) => store?.user?.loggedIn);
     const [params] = useSearchParams();
+    const userId = useAppSelector((store) => store?.user?.id);
+    useEffect(() => {
+        setUserId(String(userId));
+        logEvent(AmplitudeEvents.MAIN_PAGE);
+    }, []);
 
     useEffect(() => {
         dispatch(
@@ -40,23 +44,23 @@ const Content = () => {
                         isLoading={true}
                     />
                 )}
-                {product.length ? (
-                    product.map((item) => (
-                        <CardProduct
-                            key={item.id}
-                            id={item.id}
-                            rating={item.rating}
-                            image={item.img}
-                            name={item.title}
-                            cost={item.sellingPrice}
-                            isLoading={isLoading}
-                            loggedIn={loggedIn}
-                            inCart={item?.inCart}
-                        />
-                    ))
-                ) : (
-                    <Box sx={{ color: colors.iconActiveColor }}>{strings.nothing_found}</Box>
-                )}
+                {product.length
+                    ? product.map((item) => (
+                          <CardProduct
+                              key={item.id}
+                              id={item.id}
+                              rating={item.rating}
+                              image={item.img}
+                              name={item.title}
+                              cost={item.sellingPrice}
+                              isLoading={isLoading}
+                              loggedIn={loggedIn}
+                              inCart={item?.inCart}
+                          />
+                      ))
+                    : !isLoading && (
+                          <Box sx={{ color: colors.iconActiveColor }}>{strings.nothing_found}</Box>
+                      )}
             </Grid>
             <SideNavBar />
         </>

@@ -8,15 +8,15 @@ import NotificationItem from 'components/notification/NotificationItem';
 import strings from 'constants/strings';
 import { fetchNotification } from 'redux/slices/contentSlice';
 import { useAppDispatch, useAppSelector } from 'types/globalTypes';
+import { AmplitudeEvents, logEvent } from 'utils/logger';
 
 const Notification = () => {
-    const [notificationList, isLoading] = useAppSelector((state) => [
-        state?.content?.notification,
-        state?.loading?.notification,
-    ]);
+    const isLoading = useAppSelector((state) => state?.loading?.notification);
+    const notificationList = useAppSelector((state) => state?.content?.notification);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
+        logEvent(AmplitudeEvents.NOTIFICATION_PAGE);
         dispatch(fetchNotification());
     }, []);
 
@@ -30,7 +30,7 @@ const Notification = () => {
                 marginBottom: '70px',
             }}>
             <Box p={'16px'}>
-                <h3 style={{ fontWeight: 400, margin: '14px 0' }}>Уведомление</h3>
+                <h3 style={{ fontWeight: 400, margin: '14px 0' }}>{strings.notifications}</h3>
                 {isLoading ? (
                     <Box
                         sx={{

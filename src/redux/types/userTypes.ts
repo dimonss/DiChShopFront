@@ -1,4 +1,5 @@
 export interface UserStateI {
+    id: number;
     firstname: string;
     lastname: string;
     login: string;

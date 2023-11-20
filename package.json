@@ -2,7 +2,7 @@
   "name": "coffee",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
+  "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
@@ -19,12 +19,16 @@
     "@types/node": "^16.18.39",
     "@types/react": "^18.2.17",
     "@types/react-dom": "^18.2.7",
-    "axios": "^1.4.0",
-    "eslint": "^8.46.0",
+    "@types/amplitude-js": "^8.16.5",
     "eslint-config-prettier": "^8.10.0",
     "eslint-plugin-prettier": "^5.0.0",
-    "notistack": "^3.0.1",
     "prettier": "^3.0.1",
+    "eslint": "^8.46.0"
+  },
+  "dependencies": {
+    "amplitude-js": "^8.21.9",
+    "axios": "^1.4.0",
+    "notistack": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.2",
@@ -32,8 +36,7 @@
     "react-scripts": "5.0.1",
     "styled-components": "^6.0.5",
     "sweetalert2": "^11.7.32",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "typescript": "^4.9.5"
   },
   "scripts": {
     "start": "react-scripts start",

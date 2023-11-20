@@ -12,12 +12,15 @@ export interface Config {
     API_URL: string;
     STATIC_PATH: string;
     BOT_NAME: string;
+    AMPLITUDE: string;
+    APP_NAME: string;
 }
 
 export interface DefaultConfig {
     stateVersion: number;
     isProduction: () => boolean;
     isDev: () => boolean;
+    APP_NAME: string;
 }
 
 interface EnvConfig {
@@ -25,6 +28,7 @@ interface EnvConfig {
     API_URL: string;
     STATIC_PATH: string;
     BOT_NAME: string;
+    AMPLITUDE: string;
 }
 
 export type BuildTypesScheme = {

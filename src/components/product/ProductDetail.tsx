@@ -20,6 +20,7 @@ import { PRODUCT_DEFAULT_VALUES } from 'constants/globalConstants';
 import useAuth from 'hooks/useAuth';
 import useGlobalErrorSnackbar from 'hooks/useGlobalErrorSnackbar';
 import useFavoriteOperations from 'hooks/favorite/useFavoriteOperations';
+import { AmplitudeEvents, logEvent } from 'utils/logger';
 
 const ProductDetail = () => {
     const { loggedIn } = useAppSelector((state) => state?.user);
@@ -49,6 +50,7 @@ const ProductDetail = () => {
             res.then((res) => {
                 if (res?.data?.status === API_RESPONSE_STATUS?.OK) {
                     setData(res?.data?.data);
+                    logEvent(AmplitudeEvents.DETAIL_PRODUCT_PAGE, { productId: params?.id });
                 } else {
                     setError(true);
                 }

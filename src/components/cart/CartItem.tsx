@@ -13,6 +13,7 @@ import { getApiErrorMessage, getResponseErrorMessage } from 'api/utils';
 import useAlert from 'hooks/useAlert';
 import URLS from 'constants/urls';
 import { Link } from 'react-router-dom';
+import {AmplitudeEvents, logEvent} from "utils/logger";
 
 const counterButtonStyles = {
     display: 'flex',
@@ -41,6 +42,7 @@ const CartItem: React.FC<PropI> = ({ data, deleteItemCallback, changeAmountCallb
             .then((res) => {
                 if (res?.data?.status === API_RESPONSE_STATUS.OK) {
                     deleteItemCallback(id);
+                    logEvent(AmplitudeEvents.DELETE_FROM_CART, { id });
                 } else {
                     showErrorAlert(getResponseErrorMessage(res));
                 }

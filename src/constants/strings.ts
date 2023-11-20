@@ -19,6 +19,9 @@ const strings = {
     login: 'Войти',
     ups: 'Упс. Что то пошло не так',
     notifications_is_empty: 'Уведомления отсутствуют',
+    notifications: 'Уведомления',
+    favorite: 'Избранные',
+    cart: 'Корзина',
 };
 
 export default strings;
