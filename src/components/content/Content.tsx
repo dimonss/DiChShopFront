@@ -24,9 +24,13 @@ const Content = () => {
     }, []);
 
     useEffect(() => {
-        dispatch(
-            fetchProduct({ search: params.get('search'), categoryId: params.get('category'), loggedIn }),
-        );
+            dispatch(
+                fetchProduct({
+                    search: params.get('search'),
+                    categoryId: params.get('category'),
+                    loggedIn,
+                }),
+            );
     }, [params, loggedIn]);
 
     return (

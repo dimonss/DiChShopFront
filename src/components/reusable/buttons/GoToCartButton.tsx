@@ -1,12 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import { ReactComponent as ArrowImg } from 'images/arrow.svg';
+import URLS from 'constants/urls';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import './goToCartButton.css';
 
-const GoBackButton = () => {
+interface PropI {
+    inCart?: boolean;
+}
+
+const GoToCartButton: React.FC<PropI> = ({ inCart }) => {
     const navigate = useNavigate();
     return (
         <Box
+            className={inCart ? 'jump': 'hide'}
             sx={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -15,18 +22,18 @@ const GoBackButton = () => {
                 backgroundColor: 'rgba(64.81, 64.81, 64.81, 0.50)',
                 height: 40,
                 width: 40,
-                left: 24,
-                top: 36,
+                right: 14,
+                bottom: inCart ? 80 : '-40px',
                 zIndex: 2,
                 borderRadius: '50%',
                 backdropFilter: 'blur(10px)',
             }}
             onClick={() => {
-                navigate(-1);
+                navigate(URLS.CART);
             }}>
-            <ArrowImg />
+            <ShoppingCartIcon />
         </Box>
     );
 };
 
-export default GoBackButton;
+export default GoToCartButton;

@@ -21,6 +21,7 @@ import useAuth from 'hooks/useAuth';
 import useGlobalErrorSnackbar from 'hooks/useGlobalErrorSnackbar';
 import useFavoriteOperations from 'hooks/favorite/useFavoriteOperations';
 import { AmplitudeEvents, logEvent } from 'utils/logger';
+import GoToCartButton from 'components/reusable/buttons/GoToCartButton';
 
 const ProductDetail = () => {
     const { loggedIn } = useAppSelector((state) => state?.user);
@@ -79,6 +80,7 @@ const ProductDetail = () => {
                 minHeight: 'calc(100svh - 28px)',
             }}>
             <GoBackButton />
+            <GoToCartButton inCart={localInCart} />
             <Box>
                 {isLoading ? (
                     <Box
@@ -126,8 +128,8 @@ const ProductDetail = () => {
                                     ? favoritesOperationsIsLoading
                                         ? () => {}
                                         : localInFavorites
-                                        ? deleteProductFromFavorites
-                                        : addProductToFavorites
+                                          ? deleteProductFromFavorites
+                                          : addProductToFavorites
                                     : loginAlert
                             }>
                             {favoritesOperationsIsLoading ? (
@@ -224,8 +226,8 @@ const ProductDetail = () => {
                             ? cartOperationsIsLoading
                                 ? () => {}
                                 : localInCart
-                                ? deleteProductFromCart
-                                : addProductToCart
+                                  ? deleteProductFromCart
+                                  : addProductToCart
                             : loginAlert
                     }
                     sx={{

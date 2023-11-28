@@ -59,7 +59,7 @@ const SearchInput = () => {
                 <SearchIcon sx={{ color: '#B9AE9B' }} />
             </SearchIconWrapper>
             <StyledInputBase
-                placeholder="Browse your favourite coffee…"
+                placeholder="Живой поиск…"
                 inputProps={{ 'aria-label': 'search' }}
                 fullWidth
                 value={params.get('search') || ''}

@@ -1,0 +1,33 @@
+@keyframes jump {
+    0% {
+        bottom: -40px;
+    }
+    60% {
+        bottom: 100px;
+    }
+    100% {
+        bottom: 80px;
+    }
+}
+
+@keyframes hide {
+    0% {
+        bottom: 80px;
+    }
+    40% {
+        bottom: 100px;
+    }
+    100% {
+        bottom: -40px;
+    }
+}
+
+.jump {
+    animation-name: jump;
+    animation-duration: 0.4s;
+}
+
+.hide {
+    animation-name: hide;
+    animation-duration: 0.4s;
+}

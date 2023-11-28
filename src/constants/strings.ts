@@ -22,6 +22,7 @@ const strings = {
     notifications: 'Уведомления',
     favorite: 'Избранные',
     cart: 'Корзина',
+    go_to_cart: 'Перейти в корзину',
 };
 
 export default strings;

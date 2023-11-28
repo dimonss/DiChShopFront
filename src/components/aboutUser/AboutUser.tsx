@@ -1,13 +1,14 @@
 import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-import brewImage from 'images/Brew.png';
+import brewImage from 'images/DiChShop.png';
 import { useAppSelector } from 'types/globalTypes';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 import useAuthAlert from 'hooks/useLoginAlert';
 import useLogoutAlert from 'hooks/useLogoutAlert';
 import defaultUserPhoto from 'images/default_user_photo.png';
+import { getUserPhotoFullPath } from 'utils/mainUtils';
 
 const AboutUser = () => {
     const { photo, loggedIn } = useAppSelector((state) => state?.user);
@@ -52,7 +53,7 @@ const AboutUser = () => {
                                 e.currentTarget.onerror = null;
                                 e.currentTarget.src = defaultUserPhoto;
                             }}
-                            src={loggedIn ? photo : defaultUserPhoto}
+                            src={loggedIn ? getUserPhotoFullPath(photo) : defaultUserPhoto}
                             style={{
                                 height: '50px',
                                 width: '50px',

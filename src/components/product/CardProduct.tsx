@@ -79,8 +79,8 @@ const CardProduct: React.FC<PropI> = ({
                                 borderBottomRightRadius: '15px',
                                 borderTopLeftRadius: '15px',
                                 background: 'white',
-                                opacity: '0.3',
                                 overflow: 'hidden',
+                                backgroundColor: 'rgba(64.81, 64.81, 64.81, 0.50)',
                             }}
                         />
                         <Box
