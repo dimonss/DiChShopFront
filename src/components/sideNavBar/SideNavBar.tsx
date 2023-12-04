@@ -10,8 +10,11 @@ import { useSearchParams } from 'react-router-dom';
 const SideNavBar = () => {
     const { loggedIn } = useAppSelector((state) => state?.user);
     const dispatch = useAppDispatch();
+    const [params, setSearchParams] = useSearchParams();
     useEffect(() => {
         dispatch(fetchCategory());
+        setSearchParams({ category: '-1', search: params.get('search') || '' });
+
     }, [loggedIn]);
     useWindowSize();
     const categories = useAppSelector((state) => state?.content?.category);
@@ -19,7 +22,6 @@ const SideNavBar = () => {
         () => [{ id: -1, name: 'Все Категории' }, ...categories],
         [categories],
     );
-    const [params, setSearchParams] = useSearchParams();
     return (
         <Box
             sx={{
