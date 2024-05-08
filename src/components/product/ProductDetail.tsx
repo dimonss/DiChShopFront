@@ -6,7 +6,6 @@ import { ProductStateI } from 'redux/types/productTypes';
 import Box from '@mui/material/Box';
 import colors from 'layout/colors';
 import StarIcon from '@mui/icons-material/Star';
-import config from 'config';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import GoBackButton from 'components/reusable/buttons/GoBackButton';
@@ -22,6 +21,7 @@ import useGlobalErrorSnackbar from 'hooks/useGlobalErrorSnackbar';
 import useFavoriteOperations from 'hooks/favorite/useFavoriteOperations';
 import { AmplitudeEvents, logEvent } from 'utils/logger';
 import GoToCartButton from 'components/reusable/buttons/GoToCartButton';
+import { getFullPathToImg } from 'utils/mainUtils';
 
 const ProductDetail = () => {
     const { loggedIn } = useAppSelector((state) => state?.user);
@@ -106,7 +106,7 @@ const ProductDetail = () => {
                             borderRadius: '40px',
                             overflow: 'hidden',
                             padding: '0',
-                            backgroundImage: `url(${config.STATIC_PATH}${data?.img})`,
+                            backgroundImage: `url(${getFullPathToImg(data?.img)})`,
                             backgroundPosition: 'center center',
                             backgroundSize: 'cover',
                             marginBottom: '18px',

@@ -12,3 +12,5 @@ export const PRODUCT_DEFAULT_VALUES: ProductStateI = {
     inCart: false,
     favorite: false,
 };
+
+export const PATH_TO_IMAGE = 'static/images/';

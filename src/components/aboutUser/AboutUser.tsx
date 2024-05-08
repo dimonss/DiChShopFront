@@ -8,7 +8,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import useAuthAlert from 'hooks/useLoginAlert';
 import useLogoutAlert from 'hooks/useLogoutAlert';
 import defaultUserPhoto from 'images/default_user_photo.png';
-import { getUserPhotoFullPath } from 'utils/mainUtils';
+import { getFullPathToImg } from 'utils/mainUtils';
 
 const AboutUser = () => {
     const { photo, loggedIn } = useAppSelector((state) => state?.user);
@@ -53,7 +53,7 @@ const AboutUser = () => {
                                 e.currentTarget.onerror = null;
                                 e.currentTarget.src = defaultUserPhoto;
                             }}
-                            src={loggedIn ? getUserPhotoFullPath(photo) : defaultUserPhoto}
+                            src={loggedIn ? getFullPathToImg(photo) : defaultUserPhoto}
                             style={{
                                 height: '50px',
                                 width: '50px',

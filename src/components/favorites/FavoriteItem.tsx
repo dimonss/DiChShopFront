@@ -1,13 +1,13 @@
 import React from 'react';
 import colors from 'layout/colors';
 import Box from '@mui/material/Box';
-import config from 'config';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { ProductStateI } from 'redux/types/productTypes';
 import URLS from 'constants/urls';
 import { Link } from 'react-router-dom';
 import useFavoriteOperations from 'hooks/favorite/useFavoriteOperations';
 import LocalLoader, { LOCAL_LOADER_SIZES } from 'components/reusable/loaders/LocalLoader';
+import {getFullPathToImg} from "utils/mainUtils";
 
 interface PropI {
     data: ProductStateI;
@@ -45,7 +45,7 @@ const FavoriteItem: React.FC<PropI> = ({ data, deletedItemCallback }) => {
                             borderRadius: '15px',
                             overflow: 'hidden',
                             float: 'left',
-                            backgroundImage: `url(${config.STATIC_PATH}${data?.img})`,
+                            backgroundImage: `url(${getFullPathToImg(data?.img)})`,
                             noRepeat: 'center top',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',

@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import colors from 'layout/colors';
 import Box from '@mui/material/Box';
-import config from 'config';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { ReactComponent as DecrementIcon } from 'images/decrement.svg';
 import { ReactComponent as IncrementIcon } from 'images/increment.svg';
@@ -13,7 +12,8 @@ import { getApiErrorMessage, getResponseErrorMessage } from 'api/utils';
 import useAlert from 'hooks/useAlert';
 import URLS from 'constants/urls';
 import { Link } from 'react-router-dom';
-import {AmplitudeEvents, logEvent} from "utils/logger";
+import { AmplitudeEvents, logEvent } from 'utils/logger';
+import { getFullPathToImg } from 'utils/mainUtils';
 
 const counterButtonStyles = {
     display: 'flex',
@@ -109,7 +109,7 @@ const CartItem: React.FC<PropI> = ({ data, deleteItemCallback, changeAmountCallb
                 borderRadius: '15px',
                 overflow: 'hidden',
             }}>
-            <Link to={URLS.PRODUCT_RAW + data?.id} style={{maxWidth:'70%'}}>
+            <Link to={URLS.PRODUCT_RAW + data?.id} style={{ maxWidth: '70%' }}>
                 <Box>
                     <Box
                         sx={{
@@ -118,7 +118,7 @@ const CartItem: React.FC<PropI> = ({ data, deleteItemCallback, changeAmountCallb
                             borderRadius: '15px',
                             overflow: 'hidden',
                             float: 'left',
-                            backgroundImage: `url(${config.STATIC_PATH}${data?.img})`,
+                            backgroundImage: `url(${getFullPathToImg(data?.img)})`,
                             noRepeat: 'center top',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',

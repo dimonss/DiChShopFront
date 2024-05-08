@@ -6,13 +6,13 @@ import colors from 'layout/colors';
 import LocalLoader, { LOCAL_LOADER_SIZES } from 'components/reusable/loaders/LocalLoader';
 import { Link } from 'react-router-dom';
 import URLS from 'constants/urls';
-import config from 'config';
 import strings from 'constants/strings';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import CircularProgress from '@mui/material/CircularProgress';
 import useLoginAlert from 'hooks/useLoginAlert';
 import useCartOperations from 'hooks/cart/useCartOperations';
+import {getFullPathToImg} from "utils/mainUtils";
 
 interface PropI {
     id: number;
@@ -110,7 +110,7 @@ const CardProduct: React.FC<PropI> = ({
                                 borderRadius: '15px',
                                 overflow: 'hidden',
                                 padding: '0',
-                                backgroundImage: `url(${config.STATIC_PATH}${image})`,
+                                backgroundImage: `url(${getFullPathToImg(image)})`,
                                 backgroundPosition: 'center center',
                                 backgroundSize: 'cover',
                             }}
