@@ -17,12 +17,13 @@ const strings = {
     you_are_success_authorized: 'Вы успешно авторизовались',
     place_order: 'Оформить заказ',
     login: 'Войти',
-    ups: 'Упс. Что то пошло не так',
+    ups: 'Упс! Что то пошло не так...',
     notifications_is_empty: 'Уведомления отсутствуют',
     notifications: 'Уведомления',
     favorite: 'Избранные',
     cart: 'Корзина',
     go_to_cart: 'Перейти в корзину',
+    return_to_home_page: 'Вернуться на главную страницу',
 };
 
 export default strings;

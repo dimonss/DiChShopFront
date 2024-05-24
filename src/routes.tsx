@@ -8,13 +8,13 @@ import Content from 'components/content/Content';
 import { Container } from '@mui/material';
 import Favorite from 'components/favorites/Favorites';
 import Notification from 'components/notification/Notification';
-import strings from 'constants/strings';
+import ErrorView from 'components/error/ErrorView';
 
 const routes = [
     {
         path: '/',
         element: <App />,
-        errorElement: <h1>{strings.ups}</h1>,
+        errorElement: <ErrorView/>,
         children: [
             {
                 path: '/',
@@ -24,22 +24,22 @@ const routes = [
                         <Content />
                     </Container>
                 ),
-                errorElement: <h1>{strings.ups}</h1>,
+                errorElement: <ErrorView/>,
             },
             {
                 path: 'cart',
                 element: <Cart />,
-                errorElement: <h1>{strings.ups}</h1>,
+                errorElement: <ErrorView/>,
             },
             {
                 path: 'favorite',
                 element: <Favorite />,
-                errorElement: <h1>{strings.ups}</h1>,
+                errorElement: <ErrorView/>,
             },
             {
                 path: 'notifications',
                 element: <Notification />,
-                errorElement: <h1>{strings.ups}</h1>,
+                errorElement: <ErrorView/>,
             },
         ],
     },
