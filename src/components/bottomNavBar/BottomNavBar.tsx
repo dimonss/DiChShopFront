@@ -43,7 +43,6 @@ const BottomNavBar = () => {
 
     return (
         <Container
-            fixed
             sx={{
                 position: 'fixed',
                 bottom: '0px',
