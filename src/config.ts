@@ -1,7 +1,7 @@
 import { BuildType, BuildTypesScheme, Config, DefaultConfig } from 'types/configTypes';
 
 const defaultConfig: DefaultConfig = {
-    stateVersion: 1.0,
+    stateVersion: 1.1,
     isProduction: () => process.env.REACT_APP_BUILD_TYPE === BuildType.PRODUCTION,
     isDev: () => process.env.REACT_APP_BUILD_TYPE === BuildType.DEVELOPMENT,
     APP_NAME: 'DiChShop',

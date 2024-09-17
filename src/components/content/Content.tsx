@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import colors from 'layout/colors';
 import strings from 'constants/strings';
 import { AmplitudeEvents, logEvent, setUserId } from 'utils/logger';
+import useDebounce from 'hooks/useDebounce';
 
 const Content = () => {
     const dispatch = useAppDispatch();
@@ -23,7 +24,8 @@ const Content = () => {
         logEvent(AmplitudeEvents.MAIN_PAGE);
     }, []);
 
-    useEffect(() => {
+    useEffect(
+        useDebounce(() => {
             dispatch(
                 fetchProduct({
                     search: params.get('search'),
@@ -31,7 +33,9 @@ const Content = () => {
                     loggedIn,
                 }),
             );
-    }, [params, loggedIn]);
+        }, 500),
+        [params, loggedIn],
+    );
 
     return (
         <>
