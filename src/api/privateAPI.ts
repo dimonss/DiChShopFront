@@ -1,4 +1,3 @@
-import config from '../config';
 import axios, { AxiosInstance } from 'axios';
 import * as ep from './endpoints';
 import { BasicResponse } from './types/dto';
@@ -6,10 +5,7 @@ import { ProductStateI } from 'redux/types/productTypes';
 import { productSearchParamsI } from 'types/apiTypes';
 import { NotificationI } from 'api/types/notification';
 
-const baseURL = config.API_URL;
-
 export const privateAPI: AxiosInstance = axios.create({
-    baseURL,
     headers: {
         'content-type': 'application/json',
     },

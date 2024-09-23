@@ -9,7 +9,6 @@ export interface Config {
     isProduction: () => boolean;
     isDev: () => boolean;
     BUILD_TYPE: BuildType;
-    API_URL: string;
     STATIC_PATH: string;
     BOT_NAME: string;
     AMPLITUDE: string;
@@ -25,7 +24,6 @@ export interface DefaultConfig {
 
 interface EnvConfig {
     BUILD_TYPE: BuildType;
-    API_URL: string;
     STATIC_PATH: string;
     BOT_NAME: string;
     AMPLITUDE: string;
