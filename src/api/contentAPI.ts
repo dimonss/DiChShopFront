@@ -4,8 +4,10 @@ import { BasicResponse } from './types/dto';
 import { ProductStateI } from 'redux/types/productTypes';
 import { CategoryStateI } from 'redux/types/contentTypes';
 import { productSearchParamsI } from 'types/apiTypes';
-
+import config from '../config';
+const baseURL = config.API_URL;
 export const contentAPI: AxiosInstance = axios.create({
+    baseURL,
     headers: {
         'content-type': 'application/json',
     },
