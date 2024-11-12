@@ -16,13 +16,13 @@ const buildTypeConfigs: BuildTypesScheme = {
     },
     stage: {
         BUILD_TYPE: BuildType.STAGE,
-        STATIC_PATH: 'https://dich.tech/api/static/',
+        STATIC_PATH: 'https://chalysh.tech/api/static/',
         BOT_NAME: 'DiChShop_bot',
         AMPLITUDE: '5cce4fed5893cf0abed68c52c148a544',
     },
     production: {
         BUILD_TYPE: BuildType.PRODUCTION,
-        STATIC_PATH: 'https://dich.tech/api/static/',
+        STATIC_PATH: 'https://chalysh.tech/api/static/',
         BOT_NAME: 'DiChShop_bot',
         AMPLITUDE: 'fdbb043fe62623e3a14dead3eb5598f0',
     },

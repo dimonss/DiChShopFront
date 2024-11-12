@@ -1,6 +1,6 @@
-# Dich.tech shop
+# Chalysh.tech shop
 
-This project on domain [dich.tech](https://dich.tech).
+This project on domain [chalysh.tech](https://chalysh.tech).
 
 ## Available Scripts
 
