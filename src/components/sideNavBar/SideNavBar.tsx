@@ -25,7 +25,7 @@ const SideNavBar = () => {
     return (
         <Box
             sx={{
-                height: '452px',
+                height: '476px',
                 alignItems: 'center',
                 display: 'flex',
                 flexDirection: 'column',
@@ -33,10 +33,12 @@ const SideNavBar = () => {
                 background: colors.sideNavBarBG,
                 position: 'fixed',
                 bottom: '78px',
-                left: `${window.innerWidth <= 430 ? 0 : window.innerWidth / 2 - 212}px`,
+                left: `${window.innerWidth <= 430 ? 0 : window.innerWidth / 2 - 215}px`,
                 width: '32px',
                 borderTopRightRadius: '60px',
                 fontSize: '14px',
+                marginBottom: '-24px',
+                paddingBottom: '24px'
             }}>
             <Box
                 sx={{

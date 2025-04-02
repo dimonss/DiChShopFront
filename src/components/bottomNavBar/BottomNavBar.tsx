@@ -51,6 +51,7 @@ const BottomNavBar = () => {
                 zIndex: 1,
                 maxWidth: '100%',
                 width: '430px',
+                borderRadius: '40px 40px 0 0',
             }}>
             <Grid
                 container
