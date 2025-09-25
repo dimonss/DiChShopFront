@@ -5,10 +5,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import routes from 'routes';
 import store from 'redux/store';
 import { Provider } from 'react-redux';
-import TokenRefresher from 'components/TokenRefresher';
 import { SnackbarProvider } from 'notistack';
 import { init } from 'utils/logger';
 import config from 'config';
+import PWAWrapper from 'components/PWAWrapper';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -20,8 +20,9 @@ root.render(
             maxSnack={3}
             anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
             preventDuplicate>
-            <TokenRefresher />
-            <RouterProvider router={router} />
+            <PWAWrapper>
+                <RouterProvider router={router} />
+            </PWAWrapper>
         </SnackbarProvider>
     </Provider>,
 );
