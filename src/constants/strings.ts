@@ -24,6 +24,10 @@ const strings = {
     cart: 'Корзина',
     go_to_cart: 'Перейти в корзину',
     return_to_home_page: 'Вернуться на главную страницу',
+    paste_token: 'Вставить токен',
+    paste_token_from_clipboard: 'Вставить токен из буфера обмена',
+    invalid_token_format: 'Неверный формат токена',
+    token_pasted_successfully: 'Токен успешно вставлен',
 };
 
 export default strings;
