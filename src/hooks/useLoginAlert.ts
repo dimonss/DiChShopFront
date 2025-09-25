@@ -29,7 +29,7 @@ const useLoginAlert = (title: string) => {
                 dispatch(loginUser({ token, successCallback }));
             } else {
                 Swal.fire({
-                    title: 'Ошибка',
+                    title: strings.error,
                     text: strings.invalid_token_format,
                     icon: 'error',
                     confirmButtonColor: colors.iconActiveColor,
@@ -37,8 +37,8 @@ const useLoginAlert = (title: string) => {
             }
         } catch (error) {
             Swal.fire({
-                title: 'Ошибка',
-                text: 'Не удалось получить доступ к буферу обмена',
+                title: strings.error,
+                text: strings.clipboard_access_error,
                 icon: 'error',
                 confirmButtonColor: colors.iconActiveColor,
             });
@@ -48,7 +48,7 @@ const useLoginAlert = (title: string) => {
     const loginAlert = useCallback(() => {
         Swal.fire({
             title: title,
-            text: 'Для авторизации используйте наш Телеграм бот или вставьте токен из буфера обмена',
+            text: strings.auth_telegram_bot_text,
             icon: 'warning',
             showCancelButton: true,
             showDenyButton: true,
@@ -65,8 +65,8 @@ const useLoginAlert = (title: string) => {
                 pasteTokenFromClipboard();
             } else {
                 Swal.fire({
-                    title: '😔',
-                    text: 'Жаль что вы не захотели авторизоваться. \nУ нас очень простой процесс регистрации и авторизации!',
+                    title: strings.auth_sad_face,
+                    text: strings.auth_sad_text,
                     icon: 'question',
                     confirmButtonColor: colors.iconActiveColor,
                     iconColor: colors.iconActiveColor,

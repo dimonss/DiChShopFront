@@ -3,6 +3,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { alpha, styled } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
 import { useSearchParams } from 'react-router-dom';
+import strings from 'constants/strings';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -59,7 +60,7 @@ const SearchInput = () => {
                 <SearchIcon sx={{ color: '#B9AE9B' }} />
             </SearchIconWrapper>
             <StyledInputBase
-                placeholder="Живой поиск…"
+                placeholder={strings.live_search_placeholder}
                 inputProps={{ 'aria-label': 'search' }}
                 fullWidth
                 value={params.get('search') || ''}

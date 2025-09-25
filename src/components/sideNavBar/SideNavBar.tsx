@@ -6,6 +6,7 @@ import useWindowSize from 'hooks/useWindowSize';
 import { useAppDispatch, useAppSelector } from 'types/globalTypes';
 import { fetchCategory } from 'redux/slices/contentSlice';
 import { useSearchParams } from 'react-router-dom';
+import strings from 'constants/strings';
 
 const SideNavBar = () => {
     const { loggedIn } = useAppSelector((state) => state?.user);
@@ -19,7 +20,7 @@ const SideNavBar = () => {
     useWindowSize();
     const categories = useAppSelector((state) => state?.content?.category);
     const categoriesWithDefaultValue = useMemo(
-        () => [{ id: -1, name: 'Все Категории' }, ...categories],
+        () => [{ id: -1, name: strings.all_categories }, ...categories],
         [categories],
     );
     return (

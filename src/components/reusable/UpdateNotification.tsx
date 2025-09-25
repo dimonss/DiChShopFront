@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { Refresh, Close } from '@mui/icons-material';
 import colors from 'layout/colors';
+import strings from 'constants/strings';
 
 interface UpdateNotificationProps {
     isVisible: boolean;
@@ -38,7 +39,7 @@ const UpdateNotification: React.FC<UpdateNotificationProps> = ({
             <Box sx={{ display: 'flex', alignItems: 'center', flex: 1 }}>
                 <Refresh sx={{ marginRight: '8px' }} />
                 <Typography variant="body2">
-                    Доступно обновление приложения
+                    {strings.update_available}
                 </Typography>
             </Box>
             
@@ -61,7 +62,7 @@ const UpdateNotification: React.FC<UpdateNotificationProps> = ({
                         },
                     }}
                 >
-                    {isUpdating ? 'Обновление...' : 'Обновить'}
+                    {isUpdating ? strings.updating : strings.update}
                 </Button>
                 
                 <Button

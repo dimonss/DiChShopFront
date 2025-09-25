@@ -28,7 +28,7 @@ interface PropI {
 const CardProduct: React.FC<PropI> = ({
     id = 0,
     image = coffeeImage,
-    name = 'Отсутствует',
+    name = strings.missing,
     cost = 0,
     rating = 0,
     isLoading = true,

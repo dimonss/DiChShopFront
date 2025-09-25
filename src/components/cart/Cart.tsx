@@ -138,8 +138,8 @@ const Cart = () => {
                         <>
                             <h3>
                                 {loggedIn
-                                    ? 'У вас еще нет товаров в корзине'
-                                    : 'Для использования корзины необходимо авторизоваться'}
+                                    ? strings.no_cart_items
+                                    : strings.cart_auth_required}
                             </h3>
                             {!loggedIn && <LoginButton />}
                         </>
