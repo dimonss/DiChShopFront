@@ -1,6 +1,6 @@
 # Chalysh.tech Shop
 
-A modern platform available at [chalysh.tech](https://chalysh.tech).
+A modern platform available at [chalysh.tech](https://chalysh.pro).
 
 ## Description
 
