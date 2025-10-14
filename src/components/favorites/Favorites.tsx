@@ -91,8 +91,8 @@ const Favorite = () => {
                     <>
                         <h3>
                             {loggedIn
-                                ? 'У вас еще нет товаров в избранном'
-                                : 'Для использования избранного товара необходимо авторизоваться'}
+                                ? strings.no_favorites_items
+                                : strings.favorites_auth_required}
                         </h3>
                         {!loggedIn && <LoginButton />}
                     </>
