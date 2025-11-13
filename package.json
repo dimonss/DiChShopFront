@@ -24,7 +24,8 @@
     "eslint-config-prettier": "^8.10.0",
     "eslint-plugin-prettier": "^5.0.0",
     "prettier": "^3.0.1",
-    "eslint": "^8.46.0"
+    "eslint": "^8.46.0",
+    "dotenv": "^17.2.3"
   },
   "dependencies": {
     "amplitude-js": "^8.21.9",
@@ -47,7 +48,9 @@
     "build": "GENERATE_SOURCEMAP=false REACT_APP_BUILD_TYPE=production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,json}'"
+    "lint": "eslint 'src/**/*.{js,jsx,ts,tsx,json}'",
+    "generate-env": "node scripts/generate-env.mjs",
+    "deploy": "node scripts/deploy.mjs"
   },
   "eslintConfig": {
     "extends": [
