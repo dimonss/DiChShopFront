@@ -2,7 +2,8 @@
   "name": "coffee",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://chalysh.pro/api/",
+  "homepage": "/shop",
+  "proxy": "https://chalysh.pro/shop/api/",
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@emotion/react": "^11.11.1",

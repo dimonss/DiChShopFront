@@ -12,7 +12,7 @@ import PWAWrapper from 'components/PWAWrapper';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-const router = createBrowserRouter(routes);
+const router = createBrowserRouter(routes, {basename: '/shop'});
 init(config.AMPLITUDE);
 root.render(
     <Provider store={store}>

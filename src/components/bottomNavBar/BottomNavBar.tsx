@@ -7,7 +7,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import colors from 'layout/colors';
 import transitions from 'layout/transitions';
 import URLS from 'constants/urls';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import { getStatusOfNewNotifications } from 'api/privateAPI';
 import { API_RESPONSE_STATUS } from 'api/statuses';
@@ -20,7 +20,8 @@ const links = [
 ];
 
 const BottomNavBar = () => {
-    const pathname = window.location?.pathname;
+    const location = useLocation();
+    const pathname = location.pathname;
     const [isNewNotifications, setIsNewNotifications] = useState(false);
     useEffect(() => {
         getStatusOfNewNotifications().then((res) => {

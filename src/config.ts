@@ -10,22 +10,22 @@ const defaultConfig: DefaultConfig = {
 const buildTypeConfigs: BuildTypesScheme = {
     development: {
         BUILD_TYPE: BuildType.DEVELOPMENT,
-        STATIC_PATH: 'http://127.0.0.1/api/static/',
-        API_URL: 'https://chalysh.pro/api',
+        STATIC_PATH: 'http://127.0.0.1/shop/api/static/',
+        API_URL: 'https://chalysh.pro/shop/api',
         BOT_NAME: 'DiChAdminBot',
         AMPLITUDE: '5cce4fed5893cf0abed68c52c148a544',
     },
     stage: {
         BUILD_TYPE: BuildType.STAGE,
-        STATIC_PATH: 'https://chalysh.pro/api/static/',
-        API_URL: 'https://chalysh.pro/api',
+        STATIC_PATH: 'https://chalysh.pro/shop/api/static/',
+        API_URL: 'https://chalysh.pro/shop/api',
         BOT_NAME: 'DiChShop_bot',
         AMPLITUDE: '5cce4fed5893cf0abed68c52c148a544',
     },
     production: {
         BUILD_TYPE: BuildType.PRODUCTION,
-        STATIC_PATH: 'https://chalysh.pro/api/static/',
-        API_URL: 'https://chalysh.pro/api',
+        STATIC_PATH: 'https://chalysh.pro/shop/api/static/',
+        API_URL: 'https://chalysh.pro/shop/api',
         BOT_NAME: 'DiChShop_bot',
         AMPLITUDE: 'fdbb043fe62623e3a14dead3eb5598f0',
     },

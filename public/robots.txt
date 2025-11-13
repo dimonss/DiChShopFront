@@ -5,4 +5,4 @@ Allow: /
 Disallow: /cart/
 Disallow: /favorite/
 
-Host: https://chalysh.pro
+Host: https://chalysh.pro/shop

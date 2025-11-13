@@ -25,7 +25,7 @@ const usePWAUpdate = (): PWAUpdateState => {
 
     useEffect(() => {
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
+            navigator.serviceWorker.register('/shop/sw.js')
                 .then((reg) => {
                     setRegistration(reg);
                     

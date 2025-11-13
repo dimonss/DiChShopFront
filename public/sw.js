@@ -1,7 +1,7 @@
 const CACHE_NAME = 'dich-shop-v1.0.0';
 const urlsToCache = [
-  '/',
-  '/manifest.json'
+  '/shop/',
+  '/shop/manifest.json'
 ];
 
 // Install event - cache resources

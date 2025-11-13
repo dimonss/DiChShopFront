@@ -13,4 +13,4 @@ export const PRODUCT_DEFAULT_VALUES: ProductStateI = {
     favorite: false,
 };
 
-export const PATH_TO_IMAGE = '/api/static/images/';
+export const PATH_TO_IMAGE = '/shop/api/static/images/';
