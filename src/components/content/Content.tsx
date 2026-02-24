@@ -40,7 +40,7 @@ const Content = () => {
     return (
         <>
             <SearchInput />
-            <Grid sx={{ display: 'grid', gridTemplateColumns: '50% 50%', margin: '20px 0 90px 46px' }}>
+            <Grid sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', margin: '20px 0 90px 46px' }}>
                 {isLoading && (
                     <CardProduct
                         key={-1}
@@ -54,21 +54,21 @@ const Content = () => {
                 )}
                 {product.length
                     ? product.map((item) => (
-                          <CardProduct
-                              key={item.id}
-                              id={item.id}
-                              rating={item.rating}
-                              image={item.img}
-                              name={item.title}
-                              cost={item.sellingPrice}
-                              isLoading={isLoading}
-                              loggedIn={loggedIn}
-                              inCart={item?.inCart}
-                          />
-                      ))
+                        <CardProduct
+                            key={item.id}
+                            id={item.id}
+                            rating={item.rating}
+                            image={item.img}
+                            name={item.title}
+                            cost={item.sellingPrice}
+                            isLoading={isLoading}
+                            loggedIn={loggedIn}
+                            inCart={item?.inCart}
+                        />
+                    ))
                     : !isLoading && (
-                          <Box sx={{ color: colors.iconActiveColor }}>{strings.nothing_found}</Box>
-                      )}
+                        <Box sx={{ color: colors.iconActiveColor }}>{strings.nothing_found}</Box>
+                    )}
             </Grid>
             <SideNavBar />
         </>

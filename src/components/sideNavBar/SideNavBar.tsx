@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import colors from 'layout/colors';
 import transitions from 'layout/transitions';
 import Box from '@mui/material/Box';
-import useWindowSize from 'hooks/useWindowSize';
+
 import { useAppDispatch, useAppSelector } from 'types/globalTypes';
 import { fetchCategory } from 'redux/slices/contentSlice';
 import { useSearchParams } from 'react-router-dom';
@@ -17,7 +17,7 @@ const SideNavBar = () => {
         setSearchParams({ category: '-1', search: params.get('search') || '' });
 
     }, [loggedIn]);
-    useWindowSize();
+
     const categories = useAppSelector((state) => state?.content?.category);
     const categoriesWithDefaultValue = useMemo(
         () => [{ id: -1, name: strings.all_categories }, ...categories],
@@ -34,7 +34,7 @@ const SideNavBar = () => {
                 background: colors.sideNavBarBG,
                 position: 'fixed',
                 bottom: '78px',
-                left: `${window.innerWidth <= 430 ? 0 : window.innerWidth / 2 - 215}px`,
+                left: 0,
                 width: '32px',
                 borderTopRightRadius: '60px',
                 fontSize: '14px',

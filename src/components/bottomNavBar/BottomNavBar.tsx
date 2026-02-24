@@ -50,8 +50,10 @@ const BottomNavBar = () => {
                 background: colors.primary,
                 boxShadow: `0px 0px 20px ${colors.iconActiveColor}`,
                 zIndex: 1,
-                maxWidth: '100%',
-                width: '430px',
+                maxWidth: { xs: '100%', md: '430px' },
+                width: { xs: '100%', md: '430px' },
+                left: { xs: 'auto', md: '50%' },
+                transform: { xs: 'none', md: 'translateX(-50%)' },
                 borderRadius: '40px 40px 0 0',
             }}>
             <Grid

@@ -10,8 +10,7 @@
     color: white;
     font-family: "serif";
     position: relative;
-    max-width: 430px;
-    overflow: hidden;
+    width: 100%;
 }
 
 .App-logo {

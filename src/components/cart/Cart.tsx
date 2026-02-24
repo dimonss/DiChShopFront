@@ -104,6 +104,8 @@ const Cart = () => {
                 flexDirection: 'column',
                 color: colors.white,
                 width: '100%',
+                maxWidth: '800px',
+                margin: '0 auto',
             }}>
             <Box p={'16px'}>
                 <h3 style={{ fontWeight: 400, margin: '14px 0' }}>{strings.cart}</h3>

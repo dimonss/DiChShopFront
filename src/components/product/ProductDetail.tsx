@@ -78,6 +78,8 @@ const ProductDetail = () => {
                 justifyContent: 'space-between',
                 color: colors.white,
                 minHeight: 'calc(100svh - 28px)',
+                maxWidth: '800px',
+                margin: '0 auto',
             }}>
             <GoBackButton />
             <GoToCartButton inCart={localInCart} />
@@ -126,10 +128,10 @@ const ProductDetail = () => {
                             onClick={
                                 loggedIn
                                     ? favoritesOperationsIsLoading
-                                        ? () => {}
+                                        ? () => { }
                                         : localInFavorites
-                                          ? deleteProductFromFavorites
-                                          : addProductToFavorites
+                                            ? deleteProductFromFavorites
+                                            : addProductToFavorites
                                     : loginAlert
                             }>
                             {favoritesOperationsIsLoading ? (
@@ -224,10 +226,10 @@ const ProductDetail = () => {
                     onClick={
                         loggedIn
                             ? cartOperationsIsLoading
-                                ? () => {}
+                                ? () => { }
                                 : localInCart
-                                  ? deleteProductFromCart
-                                  : addProductToCart
+                                    ? deleteProductFromCart
+                                    : addProductToCart
                             : loginAlert
                     }
                     sx={{

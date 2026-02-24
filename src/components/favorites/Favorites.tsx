@@ -61,6 +61,8 @@ const Favorite = () => {
                 flexDirection: 'column',
                 color: colors.white,
                 width: '100%',
+                maxWidth: '800px',
+                margin: '0 auto',
                 marginBottom: '70px',
             }}>
             <Box p={'16px'}>
