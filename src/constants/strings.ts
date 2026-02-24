@@ -43,6 +43,10 @@ const strings = {
     favorites_auth_required: 'Для использования избранного товара необходимо авторизоваться',
     no_cart_items: 'У вас еще нет товаров в корзине',
     cart_auth_required: 'Для использования корзины необходимо авторизоваться',
+    nav_home: 'Главная',
+    nav_cart: 'Корзина',
+    nav_favorite: 'Избранное',
+    nav_notifications: 'Уведомления',
 };
 
 export default strings;

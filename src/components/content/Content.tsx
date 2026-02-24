@@ -40,7 +40,7 @@ const Content = () => {
     return (
         <>
             <SearchInput />
-            <Grid sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', margin: '20px 0 90px 46px' }}>
+            <Grid sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', margin: { xs: '20px 0 90px 46px', lg: '20px 20px 20px 46px' } }}>
                 {isLoading && (
                     <CardProduct
                         key={-1}

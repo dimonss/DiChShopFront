@@ -15,7 +15,7 @@ const AboutUser = () => {
     const { loginAlert } = useAuthAlert('=)');
     const { logoutAlert } = useLogoutAlert();
     return (
-        <Box mt={"20px"} sx={{ display: 'flex', justifyContent: 'space-between', height: '120px', maxWidth: '800px', margin: '20px auto 0' }}>
+        <Box mt={"20px"} sx={{ display: 'flex', justifyContent: 'space-between', height: '120px', maxWidth: '800px', margin: { xs: '20px auto 0', md: '84px auto 0' } }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '140px' }}>
                 <img src={mainLogo} alt={'brewImage'} width={'140px'} />
             </Box>
