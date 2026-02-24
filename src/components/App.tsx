@@ -13,7 +13,7 @@ const App = () => {
     useNoAuthHandler();
     return (
         <Box className="App">
-            <Box sx={{ paddingLeft: { xs: 0, lg: '200px' }, width: '100%' }}>
+            <Box sx={{ width: {xs: '100%', lg: '80%'}, marginLeft: { xs: 0, lg: '200px' } }}>
                 <Outlet />
             </Box>
             <BottomNavBar />
