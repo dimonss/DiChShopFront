@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "/shop",
-  "proxy": "https://chalysh.pro/shop/api/",
+  "proxy": "https://chalysh.dev/shop/api/",
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@emotion/react": "^11.11.1",

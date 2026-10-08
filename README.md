@@ -1,6 +1,6 @@
-# Chalysh.pro Shop
+# chalysh.dev Shop
 
-A modern platform available at [chalysh.pro](https://chalysh.pro/shop).
+A modern platform available at [chalysh.dev](https://chalysh.dev/shop).
 
 ## Description
 
