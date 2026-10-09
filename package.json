@@ -1,6 +1,6 @@
 {
-  "name": "coffee",
-  "version": "0.1.0",
+  "name": "DiCh Shop",
+  "version": "1.0.0",
   "private": true,
   "homepage": "/shop",
   "proxy": "https://chalysh.dev/shop/api/",
